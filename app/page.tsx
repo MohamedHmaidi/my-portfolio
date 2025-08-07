@@ -130,7 +130,7 @@ export default function ProfessionalDevOpsPortfolio() {
         { name: "Azure", logo: "/logos/azuree.png" },
         { name: "AWS", logo: "/logos/aws.png" },
         { name: "Proxmox", logo: "/logos/proxmox.png" },
-        { name: "Prometheus", logo: "/logos/prometheus.png" },
+        { name: "Prometheus", logo: "/logos/Prometheus.png" },
         { name: "Grafana", logo: "/logos/grafana.png" },
         { name: "VMware vCenter", logo: "/logos/vmwarevcenter.png" },
         { name: "ESXi", logo: "/logos/esxi.png" },
@@ -146,9 +146,9 @@ export default function ProfessionalDevOpsPortfolio() {
       items: [
         { name: "Ansible", logo: "/logos/ansible.png" },
         { name: "Terraform", logo: "/logos/terraform.png" },
-        { name: "Jenkins", logo: "/logos/jenkins.png" },
+        { name: "Jenkins", logo: "/logos/Jenkins.png" },
         { name: "Git", logo: "/logos/Git.png" },
-        { name: "GitHub", logo: "/logos/GitHub.png" },
+        { name: "GitHub", logo: "/logos/Github.png" },
         { name: "Kubespray", logo: "/logos/kubespray.png" },
         { name: "MetalLB", logo: "/logos/metallb.png" },
         { name: "Helm", logo: "/logos/Helm.png" },
@@ -198,8 +198,8 @@ export default function ProfessionalDevOpsPortfolio() {
       category: "Desktop Development",
       items: [
         { name: "C", logo: "/logos/C.png" },
-        { name: "Java", logo: "/logos/java.png" },
-        { name: "JavaFX", logo: "/logos/javaFX.png" },
+        { name: "Java", logo: "/logos/Java.png" },
+        { name: "JavaFX", logo: "/logos/JavaFX.png" },
       ],
       icon: <Monitor className="h-6 w-6" />,
       color: "from-gray-500 to-slate-500",
@@ -449,7 +449,7 @@ export default function ProfessionalDevOpsPortfolio() {
       metrics: { automation: "95% with Ansible", scalability: "Up to 10 nodes", monitoring: "Full coverage" },
     },
     {
-      title: "Infrastructure Monitoring Suite",
+      title: "DevSecOps Pipeline",
       description:
         "Created a comprehensive CI/CD pipeline to automate code compilation, testing, quality checks, vulnerability scanning, and deployment. Enhanced security with auditing and implemented email notifications for updates, ensuring a robust and efficient software delivery process.",
       longDescription:
@@ -470,7 +470,7 @@ export default function ProfessionalDevOpsPortfolio() {
         "Kubernetes",
         "KubeAudit",
       ],
-      images: ["/projects/jenkins.png", "/projects/jenkins2.png"],
+      images: ["/projects/Jenkins.png", "/projects/jenkins2.png"],
       featured: false,
       metrics: { automation: "95% with CI/CD pipeline", monitoring: "Full coverage with email notifications", reliability: "99.9% uptime" },
     },
