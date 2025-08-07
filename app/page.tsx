@@ -6,50 +6,87 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Layout,
-  Brain,Laptop,Terminal,
-  BarChart,
-  User,
-  Github,
-  Linkedin,
-  Mail,
-  Phone,
-  MapPin,
-  ExternalLink,
-  Cloud,
-  Server,
-  Shield,
-  Zap,
-  GitBranch,
-  Monitor,
-  ChevronDown,
-  Send,
-  Calendar,
-  Building,
-  Award,
-  Container,
-  FileCode,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Download,
-  Code,
-  Sparkles,
-  Rocket,
-  Target,
-  TrendingUp,
-  Globe,
-  CheckCircle,
-  BookOpen,
-} from "lucide-react"
+import { Layout, Brain, Laptop, Terminal, BarChart, User, Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Cloud, Server, Shield, Zap, GitBranch, Monitor, ChevronDown, Send, Calendar, Building, Award, Container, FileCode, X, ChevronLeft, ChevronRight, Download, Code, Sparkles, Rocket, Target, TrendingUp, Globe, CheckCircle, BookOpen } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
+
+// Define interfaces for data structures
+interface SkillItem {
+  name: string
+  logo: string
+}
+
+interface SkillCategory {
+  category: string
+  items: SkillItem[]
+  icon: React.ReactNode
+  color: string
+}
+
+interface Certification {
+  name: string
+  code: string
+  issuer: string
+  date: string
+  logo: string
+  description: string
+  skills: string[]
+  credentialUrl: string
+  color: string
+}
+
+interface EducationEntry {
+  degree: string
+  institution: string
+  period: string
+  location: string
+  description: string
+  courses: string[]
+  skills: string[]
+  color: string
+}
+
+interface ExperienceEntry {
+  title: string
+  company: string
+  period: string
+  location: string
+  description: string
+  achievements: string[]
+  technologies: string[]
+}
+
+interface ProjectMetrics {
+  automation?: string
+  scalability?: string
+  monitoring?: string
+  reliability?: string
+  system_availability?: string
+  response_time?: string
+  equipment_tracking?: string
+  [key: string]: string | undefined // Allow for arbitrary string keys
+}
+
+interface Project {
+  title: string
+  description: string
+  longDescription: string
+  tech: string[]
+  images: string[]
+  featured: boolean
+  metrics?: ProjectMetrics
+}
+
+interface Stat {
+  label: string
+  value: string
+  icon: React.ReactNode
+}
 
 export default function ProfessionalDevOpsPortfolio() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeSection, setActiveSection] = useState("hero")
-  const [selectedProject, setSelectedProject] = useState<any>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isLoaded, setIsLoaded] = useState(false)
@@ -60,15 +97,12 @@ export default function ProfessionalDevOpsPortfolio() {
     setIsMounted(true)
     setIsLoaded(true)
     setIsVisible(true)
-
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
-
     const handleScroll = () => {
       const sections = ["hero", "about", "skills", "certifications", "experience", "projects", "contact"]
       const scrollPosition = window.scrollY + 100
-
       for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
@@ -80,7 +114,6 @@ export default function ProfessionalDevOpsPortfolio() {
         }
       }
     }
-
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("scroll", handleScroll)
     return () => {
@@ -89,114 +122,113 @@ export default function ProfessionalDevOpsPortfolio() {
     }
   }, [])
 
-  const skills = [
-  {
-    category: "Cloud and Virtualization",
-    items: [
-      { name: "OpenStack", logo: "/logos/openstack.png" },
-      { name: "Azure", logo: "/logos/azuree.png" },
-      { name: "AWS", logo: "/logos/aws.png" },
-      { name: "Proxmox", logo: "/logos/proxmox.png" },
-      { name: "Prometheus", logo: "/logos/prometheus.png" },
-      { name: "Grafana", logo: "/logos/grafana.png" },
-      { name: "VMware vCenter", logo: "/logos/vmwarevcenter.png" },
-      { name: "ESXi", logo: "/logos/esxi.png" },
-      { name: "Nakivo Backup", logo: "/logos/nakivo.png" },
-      { name: "Zimbra", logo: "/logos/zimbra.png" },
-      { name: "KVM", logo: "/logos/kvm.png" },
-    ],
-    icon: <Cloud className="h-6 w-6" />,
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    category: "DevOps and Automation",
-    items: [
-      { name: "Ansible", logo: "/logos/ansible.png" },
-      { name: "Terraform", logo: "/logos/terraform.png" },
-      { name: "Jenkins", logo: "/logos/jenkins.png" },
-      { name: "Git", logo: "/logos/Git.png" },
-      { name: "GitHub", logo: "/logos/GitHub.png" },
-      { name: "Kubespray", logo: "/logos/kubespray.png" },
-      { name: "MetalLB", logo: "/logos/metallb.png" },
-      { name: "Helm", logo: "/logos/Helm.png" },
-    ],
-    icon: <GitBranch className="h-6 w-6" />,
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    category: "Containerization and Orchestration",
-    items: [
-      { name: "Docker", logo: "/logos/docker.png" },
-      { name: "Docker Compose", logo: "/logos/compose.png" },
-      { name: "Docker Swarm", logo: "/logos/docker-swarm.png" },
-      { name: "Kubernetes", logo: "/logos/kubernetes.png" },
-    ],
-    icon: <Container className="h-6 w-6" />,
-    color: "from-purple-500 to-pink-500",
-  },
-  {
-    category: "Business Intelligence",
-    items: [
-      { name: "Talend", logo: "/logos/talend.png" },
-      { name: "Power BI", logo: "/logos/powerbi.png" },
-      { name: "Excel", logo: "/logos/Excel.png" },
-      { name: "SQL", logo: "/logos/sql.png" },
-      { name: "NoSQL", logo: "/logos/NoSQL.jpg" },
-    ],
-    icon: <BarChart className="h-6 w-6" />,
-    color: "from-yellow-500 to-orange-500",
-  },
-  {
-    category: "Web Development",
-    items: [
-      { name: "Angular", logo: "/logos/angular.png" },
-      { name: "Spring Boot", logo: "/logos/spring.png" },
-      { name: "Node.js", logo: "/logos/node.png" },
-      { name: ".NET", logo: "/logos/net.png" },
-      { name: "Tailwind CSS", logo: "/logos/tailwind.png" },
-      { name: "Bootstrap", logo: "/logos/bootstrap.png" },
-      { name: "Symfony", logo: "/logos/symfony.png" },
-      { name: "Flask", logo: "/logos/flask.png" },
-    ],
-    icon: <Globe className="h-6 w-6" />,
-    color: "from-teal-500 to-blue-500",
-  },
-  {
-    category: "Desktop Development",
-    items: [
-      { name: "C", logo: "/logos/C.png" },
-      { name: "Java", logo: "/logos/java.png" },
-      { name: "JavaFX", logo: "/logos/javaFX.png" },
-    ],
-    icon: <Monitor className="h-6 w-6" />,
-    color: "from-gray-500 to-slate-500",
-  },
-  {
-    category: "Operating Systems",
-    items: [
-      { name: "Windows (PowerShell)", logo: "/logos/powershell.png" },
-      { name: "Linux (Bash)", logo: "/logos/bash.png" },
-    ],
-    icon: <Terminal className="h-6 w-6" />,
-    color: "from-neutral-500 to-zinc-500",
-  },
-   {
-    category: "Data Science",
-    items: [
-      { name: "Python", logo: "/logos/python.png" },
-      { name: "Pandas", logo: "/logos/pandas.webp" },
-      { name: "SciPy", logo: "/logos/scipy.png" },
-      { name: "NumPy", logo: "/logos/numpy.png" },
-      { name: "Matplotlib", logo: "/logos/mathplot.png" },
-      { name: "Scikit-learn", logo: "/logos/sckit.png" },
-      { name: "OpenCV", logo: "/logos/opencv.png" },
-    ],
-    icon: <Brain className="h-6 w-6" />,
-    color: "from-indigo-500 to-purple-500",
-  },
-];
-
-  const certifications = [
+  const skills: SkillCategory[] = [
+    {
+      category: "Cloud and Virtualization",
+      items: [
+        { name: "OpenStack", logo: "/logos/openstack.png" },
+        { name: "Azure", logo: "/logos/azuree.png" },
+        { name: "AWS", logo: "/logos/aws.png" },
+        { name: "Proxmox", logo: "/logos/proxmox.png" },
+        { name: "Prometheus", logo: "/logos/prometheus.png" },
+        { name: "Grafana", logo: "/logos/grafana.png" },
+        { name: "VMware vCenter", logo: "/logos/vmwarevcenter.png" },
+        { name: "ESXi", logo: "/logos/esxi.png" },
+        { name: "Nakivo Backup", logo: "/logos/nakivo.png" },
+        { name: "Zimbra", logo: "/logos/zimbra.png" },
+        { name: "KVM", logo: "/logos/kvm.png" },
+      ],
+      icon: <Cloud className="h-6 w-6" />,
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      category: "DevOps and Automation",
+      items: [
+        { name: "Ansible", logo: "/logos/ansible.png" },
+        { name: "Terraform", logo: "/logos/terraform.png" },
+        { name: "Jenkins", logo: "/logos/jenkins.png" },
+        { name: "Git", logo: "/logos/Git.png" },
+        { name: "GitHub", logo: "/logos/GitHub.png" },
+        { name: "Kubespray", logo: "/logos/kubespray.png" },
+        { name: "MetalLB", logo: "/logos/metallb.png" },
+        { name: "Helm", logo: "/logos/Helm.png" },
+      ],
+      icon: <GitBranch className="h-6 w-6" />,
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      category: "Containerization and Orchestration",
+      items: [
+        { name: "Docker", logo: "/logos/docker.png" },
+        { name: "Docker Compose", logo: "/logos/compose.png" },
+        { name: "Docker Swarm", logo: "/logos/docker-swarm.png" },
+        { name: "Kubernetes", logo: "/logos/kubernetes.png" },
+      ],
+      icon: <Container className="h-6 w-6" />,
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      category: "Business Intelligence",
+      items: [
+        { name: "Talend", logo: "/logos/talend.png" },
+        { name: "Power BI", logo: "/logos/powerbi.png" },
+        { name: "Excel", logo: "/logos/Excel.png" },
+        { name: "SQL", logo: "/logos/sql.png" },
+        { name: "NoSQL", logo: "/logos/NoSQL.jpg" },
+      ],
+      icon: <BarChart className="h-6 w-6" />,
+      color: "from-yellow-500 to-orange-500",
+    },
+    {
+      category: "Web Development",
+      items: [
+        { name: "Angular", logo: "/logos/angular.png" },
+        { name: "Spring Boot", logo: "/logos/spring.png" },
+        { name: "Node.js", logo: "/logos/node.png" },
+        { name: ".NET", logo: "/logos/net.png" },
+        { name: "Tailwind CSS", logo: "/logos/tailwind.png" },
+        { name: "Bootstrap", logo: "/logos/bootstrap.png" },
+        { name: "Symfony", logo: "/logos/symfony.png" },
+        { name: "Flask", logo: "/logos/flask.png" },
+      ],
+      icon: <Globe className="h-6 w-6" />,
+      color: "from-teal-500 to-blue-500",
+    },
+    {
+      category: "Desktop Development",
+      items: [
+        { name: "C", logo: "/logos/C.png" },
+        { name: "Java", logo: "/logos/java.png" },
+        { name: "JavaFX", logo: "/logos/javaFX.png" },
+      ],
+      icon: <Monitor className="h-6 w-6" />,
+      color: "from-gray-500 to-slate-500",
+    },
+    {
+      category: "Operating Systems",
+      items: [
+        { name: "Windows (PowerShell)", logo: "/logos/powershell.png" },
+        { name: "Linux (Bash)", logo: "/logos/bash.png" },
+      ],
+      icon: <Terminal className="h-6 w-6" />,
+      color: "from-neutral-500 to-zinc-500",
+    },
+    {
+      category: "Data Science",
+      items: [
+        { name: "Python", logo: "/logos/python.png" },
+        { name: "Pandas", logo: "/logos/pandas.webp" },
+        { name: "SciPy", logo: "/logos/scipy.png" },
+        { name: "NumPy", logo: "/logos/numpy.png" },
+        { name: "Matplotlib", logo: "/logos/mathplot.png" },
+        { name: "Scikit-learn", logo: "/logos/sckit.png" },
+        { name: "OpenCV", logo: "/logos/opencv.png" },
+      ],
+      icon: <Brain className="h-6 w-6" />,
+      color: "from-indigo-500 to-purple-500",
+    },
+  ]
+  const certifications: Certification[] = [
     {
       name: "Microsoft Azure Fundamentals",
       code: "AZ-900",
@@ -208,65 +240,57 @@ export default function ProfessionalDevOpsPortfolio() {
       credentialUrl: "https://www.credly.com/badges/7c041a78-a448-49d9-866f-c75df2c3575c/public_url", // Replace with actual credential URL
       color: "from-blue-500 to-cyan-500",
     },
-
-        {
+    {
       name: "AWS Educate",
       code: "AWS-101",
       issuer: "Amazon web service",
       date: "2023",
       logo: "/logos/aws.png",
       description: "Foundational knowledge of cloud computing concepts, AWS core services, global infrastructure, security.",
-      skills: ["Cloud Computing",
-    "AWS Services",
-    "Security",
-    "Compliance",
-    "Cloud Pricing"],
+      skills: ["Cloud Computing", "AWS Services", "Security", "Compliance", "Cloud Pricing"],
       credentialUrl: "https://www.credly.com/badges/00309431-1def-4660-96ab-f77cbbf23321/public_url", // Replace with actual credential URL
       color: "from-blue-500 to-cyan-500",
     },
-
   ]
-
-  const education = [
+  const education: EducationEntry[] = [
     {
-    degree: "Engineering degree in Cloud Computing and IT Architecture",
-    institution: "Private Higher School of Engineering and Technology (ESPRIT)",
-    period: "2022 - 2025",
-    location: "Tunis, Tunisia",
-    description:
-      "Comprehensive training in cloud infrastructure design, virtualization, IT architecture principles, and scalable distributed systems. Gained hands-on experience with cloud platforms, network configuration, and security best practices.",
-    courses: [
-      "Cloud Computing and Virtualization",
-      "IT Infrastructure Architecture",
-      "Distributed Systems and Microservices",
-      "Network Security and Management",
-      "Data Storage and Management",
-      "DevOps and Automation",
-      "Orchestration and Container Management",
-      "Artificial Intelligence and Mathematics",
-      "Operating System Administration",
-    ],
-    skills: [
-  "Cloud Platforms",
-  "Kubernetes",
-  "Docker",
-  "Terraform",
-  "Ansible",
-  "CI/CD Pipelines",
-  "DevOps Practices",
-  "Linux System Administration",
-  "Network and Infrastructure Security",
-  "Virtualization (VMware, Hyper-V)",
-  "Microservices Architecture",
-  "Monitoring and Logging (Prometheus, Grafana, ELK)",
-  "Infrastructure as Code (IaC)",
-  "API Management",
-  "Scripting (Bash, Python)",
-  "Agile and Scrum Methodologies",
-  "System Design and Scalability"
-],
-
-    color: "from-green-500 to-emerald-500",
+      degree: "Engineering degree in Cloud Computing and IT Architecture",
+      institution: "Private Higher School of Engineering and Technology (ESPRIT)",
+      period: "2022 - 2025",
+      location: "Tunis, Tunisia",
+      description:
+        "Comprehensive training in cloud infrastructure design, virtualization, IT architecture principles, and scalable distributed systems. Gained hands-on experience with cloud platforms, network configuration, and security best practices.",
+      courses: [
+        "Cloud Computing and Virtualization",
+        "IT Infrastructure Architecture",
+        "Distributed Systems and Microservices",
+        "Network Security and Management",
+        "Data Storage and Management",
+        "DevOps and Automation",
+        "Orchestration and Container Management",
+        "Artificial Intelligence and Mathematics",
+        "Operating System Administration",
+      ],
+      skills: [
+        "Cloud Platforms",
+        "Kubernetes",
+        "Docker",
+        "Terraform",
+        "Ansible",
+        "CI/CD Pipelines",
+        "DevOps Practices",
+        "Linux System Administration",
+        "Network and Infrastructure Security",
+        "Virtualization (VMware, Hyper-V)",
+        "Microservices Architecture",
+        "Monitoring and Logging (Prometheus, Grafana, ELK)",
+        "Infrastructure as Code (IaC)",
+        "API Management",
+        "Scripting (Bash, Python)",
+        "Agile and Scrum Methodologies",
+        "System Design and Scalability",
+      ],
+      color: "from-green-500 to-emerald-500",
     },
     {
       degree: "Bachelor's Degree in Business Computing",
@@ -287,157 +311,142 @@ export default function ProfessionalDevOpsPortfolio() {
         "Data Warehousing",
         "Data Mining and Machine Learning",
       ],
-     skills: [
-  "SQL",
-  "Python",
-  "Power BI",
-  "ETL Processes",
-  "Data Warehousing",
-  "Data Analysis",
-  "Business Intelligence",
-  "Excel for Data Analytics",
-  "Machine Learning Basics",
-  "JavaScript",
-  "HTML/CSS",
-  "Web Development",
-  "Decision Support Systems",
-  "Information Systems",
-  "Project Management",
-  "E-Business Strategy",
-  "Knowledge Management Systems"
-],
-
+      skills: [
+        "SQL",
+        "Python",
+        "Power BI",
+        "ETL Processes",
+        "Data Warehousing",
+        "Data Analysis",
+        "Business Intelligence",
+        "Excel for Data Analytics",
+        "Machine Learning Basics",
+        "JavaScript",
+        "HTML/CSS",
+        "Web Development",
+        "Decision Support Systems",
+        "Information Systems",
+        "Project Management",
+        "E-Business Strategy",
+        "Knowledge Management Systems",
+      ],
       color: "from-purple-500 to-pink-500",
     },
   ]
-
-  const experience = [
-  {
-    title: "Cloud & DevOps Engineer Intern: DBaaS Platform",
-    company: "Next Step IT",
-    period: "02/2025 - 07/2025",
-    location: "Charguia, Tunisia",
-    description:
-  "Designed and developed a complete Database-as-a-Service (DBaaS) platform. Implemented scalable database infrastructure, automated deployments using Kubernetes Operators and Helm, and built secure web interfaces with Angular and Spring Boot. Integrated full-stack monitoring with Prometheus and Grafana.",
-achievements: [
-  "Designed and built a full-featured DBaaS platform from scratch",
-  "Implemented scalable and resilient database infrastructure",
-  "Automated service deployments using Kubernetes Operators and Helm",
-  "Developed secure, responsive UI with Angular and Spring Boot",
-  "Integrated observability stack with Prometheus and Grafana"
-]
-,
-    technologies: [
-      "Kubernetes",
-      "NFS",
-      "Ansible",
-      "Kubespray",
-      "MetalLB",
-      "Helm",
-      "Prometheus",
-      "Grafana",
-      "Spring Boot",
-      "Angular",
-      "MySQL",
-      "Flask",
-      "OpenCV"
-    ]
-  },
-  {
-    title: "Cloud Intern: Reporting System for Cloud Services",
-    company: "Next Step IT",
-    period: "07/2024 - 09/2024",
-    location: "Charguia, Tunisia",
-    description:
-      "Designed and deployed an architecture integrating Nakivo, Zimbra, and vCenter for storage, messaging, and IaaS. Developed an automated backend with PowerShell scripts and an interactive dashboard, including PDF report generation. Ensured production deployment and continuous operation.",
-    achievements: [
-      "Designed architecture integrating Nakivo, Zimbra, and vCenter",
-      "Developed automated backend with PowerShell scripts",
-      "Created an interactive dashboard with PDF report generation",
-      "Ensured production deployment and continuous operation"
-    ],
-    technologies: [
-      "vCenter",
-      "VMware ESXi",
-      "Nakivo Backup Solution",
-      "Zimbra",
-      "Grafana",
-      "PowerShell",
-      "VMware CLI",
-      "Linux",
-      "RESTful API",
-      "SMTP",
-      "Spring Boot",
-      "Node.js",
-      "PostgreSQL"
-    ]
-  },
-  {
-    title: "DevOps Intern - automated CI/CD and DevSecOps pipeline",
-    company: "General Automation Company",
-    period: "06/2023 - 08/2023",
-    location: "Tunis, Tunisia",
-    description:
-      "Implemented an automated CI/CD pipeline with Jenkins for builds, tests, and deployments. Containerized and deployed a Spring Boot and Angular application on Kubernetes, ensuring quality, security, and performance.",
-    achievements: [
-      "Implemented CI/CD pipeline with Jenkins for automated builds, tests, and deployments",
-      "Containerized Spring Boot and Angular application using Docker",
-      "Deployed application on Kubernetes with focus on quality and security",
-      "Utilized tools like Trivy and k6 for security and performance testing"
-    ],
-    technologies: [
-      "Jenkins",
-      "Nexus",
-      "SonarQube",
-      "Mockito",
-      "Spring Boot",
-      "Angular",
-      "Docker",
-      "Trivy",
-      "k6",
-      "Kubernetes",
-      "MySQL"
-    ]
-  },
-  {
-    title: "BI Intern – ETL Pipeline & Monitoring Dashboard for SWIFT Transactions",
-    company: "Arab International Bank of Tunisia (BIAT)",
-    period: "02/2022 - 06/2022",
-    location: "Tunis, Tunisia",
-    description:
-      "Designed a dashboard for monitoring BIAT’s Swift processes, integrating a data warehouse for data processing and visualization. Data processing involved cleaning, integration, and ETL with Talend, followed by visualization in Power BI.",
-    achievements: [
-      "Designed a dashboard for monitoring BIAT’s Swift processes",
-      "Integrated a data warehouse for efficient data processing",
-      "Performed data cleaning, integration, and ETL using Talend",
-      "Created visualizations using Power BI for actionable insights"
-    ],
-    technologies: ["Java", "Talend", "Power BI", "Excel", "PostgreSQL"]
-  }
-]
-
-  const projects = [
-    
+  const experience: ExperienceEntry[] = [
+    {
+      title: "Cloud & DevOps Engineer Intern: DBaaS Platform",
+      company: "Next Step IT",
+      period: "02/2025 - 07/2025",
+      location: "Charguia, Tunisia",
+      description:
+        "Designed and developed a complete Database-as-a-Service (DBaaS) platform. Implemented scalable database infrastructure, automated deployments using Kubernetes Operators and Helm, and built secure web interfaces with Angular and Spring Boot. Integrated full-stack monitoring with Prometheus and Grafana.",
+      achievements: [
+        "Designed and built a full-featured DBaaS platform from scratch",
+        "Implemented scalable and resilient database infrastructure",
+        "Automated service deployments using Kubernetes Operators and Helm",
+        "Developed secure, responsive UI with Angular and Spring Boot",
+        "Integrated observability stack with Prometheus and Grafana",
+      ],
+      technologies: [
+        "Kubernetes",
+        "NFS",
+        "Ansible",
+        "Kubespray",
+        "MetalLB",
+        "Helm",
+        "Prometheus",
+        "Grafana",
+        "Spring Boot",
+        "Angular",
+        "MySQL",
+        "Flask",
+        "OpenCV",
+      ],
+    },
+    {
+      title: "Cloud Intern: Reporting System for Cloud Services",
+      company: "Next Step IT",
+      period: "07/2024 - 09/2024",
+      location: "Charguia, Tunisia",
+      description:
+        "Designed and deployed an architecture integrating Nakivo, Zimbra, and vCenter for storage, messaging, and IaaS. Developed an automated backend with PowerShell scripts and an interactive dashboard, including PDF report generation. Ensured production deployment and continuous operation.",
+      achievements: [
+        "Designed architecture integrating Nakivo, Zimbra, and vCenter",
+        "Developed automated backend with PowerShell scripts",
+        "Created an interactive dashboard with PDF report generation",
+        "Ensured production deployment and continuous operation",
+      ],
+      technologies: [
+        "vCenter",
+        "VMware ESXi",
+        "Nakivo Backup Solution",
+        "Zimbra",
+        "Grafana",
+        "PowerShell",
+        "VMware CLI",
+        "Linux",
+        "RESTful API",
+        "SMTP",
+        "Spring Boot",
+        "Node.js",
+        "PostgreSQL",
+      ],
+    },
+    {
+      title: "DevOps Intern - automated CI/CD and DevSecOps pipeline",
+      company: "General Automation Company",
+      period: "06/2023 - 08/2023",
+      location: "Tunis, Tunisia",
+      description:
+        "Implemented an automated CI/CD pipeline with Jenkins for builds, tests, and deployments. Containerized and deployed a Spring Boot and Angular application on Kubernetes, ensuring quality, security, and performance.",
+      achievements: [
+        "Implemented CI/CD pipeline with Jenkins for automated builds, tests, and deployments",
+        "Containerized Spring Boot and Angular application using Docker",
+        "Deployed application on Kubernetes with focus on quality and security",
+        "Utilized tools like Trivy and k6 for security and performance testing",
+      ],
+      technologies: [
+        "Jenkins",
+        "Nexus",
+        "SonarQube",
+        "Mockito",
+        "Spring Boot",
+        "Angular",
+        "Docker",
+        "Trivy",
+        "k6",
+        "Kubernetes",
+        "MySQL",
+      ],
+    },
+    {
+      title: "BI Intern – ETL Pipeline & Monitoring Dashboard for SWIFT Transactions",
+      company: "Arab International Bank of Tunisia (BIAT)",
+      period: "02/2022 - 06/2022",
+      location: "Tunis, Tunisia",
+      description:
+        "Designed a dashboard for monitoring BIAT’s Swift processes, integrating a data warehouse for data processing and visualization. Data processing involved cleaning, integration, and ETL with Talend, followed by visualization in Power BI.",
+      achievements: [
+        "Designed a dashboard for monitoring BIAT’s Swift processes",
+        "Integrated a data warehouse for efficient data processing",
+        "Performed data cleaning, integration, and ETL using Talend",
+        "Created visualizations using Power BI for actionable insights",
+      ],
+      technologies: ["Java", "Talend", "Power BI", "Excel", "PostgreSQL"],
+    },
+  ]
+  const projects: Project[] = [
     {
       title: "Cloud Infrastructure and Orchestration with OpenStack",
       description:
         "Designed and deployed a scalable multi-node cloud infrastructure supporting virtualized resources and container workloads. Automated environment setup and configured a cluster for efficient workload management. Implemented monitoring to optimize performance and ensure high availability.",
       longDescription:
         "Designed and deployed a scalable multi-node cloud infrastructure supporting virtualized resources and container workloads. Automated environment setup and configured a cluster for efficient workload management. Implemented monitoring to optimize performance and ensure high availability.",
-      tech: ["Openstack","Keystone", "Nova", "Glance", "Magnum", "Heat", "Swift", "Ansible", "Kubernetes", "Prometheus", "Grafana"],
-      images: [
-        "openstack1.png",
-        "openstack2.png",
-        "openstack3.png",
-      ],
-      
+      tech: ["Openstack", "Keystone", "Nova", "Glance", "Magnum", "Heat", "Swift", "Ansible", "Kubernetes", "Prometheus", "Grafana"],
+      images: ["/projects/openstack1.png", "/projects/openstack2.png", "/projects/openstack3.png"],
       featured: true,
-      metrics: {
-  automation: "95% with Ansible",
-  scalability: "Up to 10 nodes",
-  monitoring: "Full coverage"
-}
-,
+      metrics: { automation: "95% with Ansible", scalability: "Up to 10 nodes", monitoring: "Full coverage" },
     },
     {
       title: "Infrastructure Monitoring Suite",
@@ -445,14 +454,25 @@ achievements: [
         "Created a comprehensive CI/CD pipeline to automate code compilation, testing, quality checks, vulnerability scanning, and deployment. Enhanced security with auditing and implemented email notifications for updates, ensuring a robust and efficient software delivery process.",
       longDescription:
         "Created a comprehensive CI/CD pipeline to automate code compilation, testing, quality checks, vulnerability scanning, and deployment. Enhanced security with auditing and implemented email notifications for updates, ensuring a robust and efficient software delivery process.",
-      tech: ["Prometheus", "Grafana", "AlertManager", "Ansible", "cAdvisor", "GitHub", "Jenkins", "Maven", "SonarQube", "Trivy", "Nexus", "Docker", "Kubernetes", "KubeAudit"],
-      images: ["jenkins.png", "jenkins2.png"],
+      tech: [
+        "Prometheus",
+        "Grafana",
+        "AlertManager",
+        "Ansible",
+        "cAdvisor",
+        "GitHub",
+        "Jenkins",
+        "Maven",
+        "SonarQube",
+        "Trivy",
+        "Nexus",
+        "Docker",
+        "Kubernetes",
+        "KubeAudit",
+      ],
+      images: ["/projects/jenkins.png", "/projects/jenkins2.png"],
       featured: false,
-      metrics: {
-automation: "95% with CI/CD pipeline",
-monitoring: "Full coverage with email notifications",
-reliability: "99.9% uptime"
-},
+      metrics: { automation: "95% with CI/CD pipeline", monitoring: "Full coverage with email notifications", reliability: "99.9% uptime" },
     },
     {
       title: "CSERS - ESPRIT Campus Security and Emergency System Deployed Microsoft Azure",
@@ -460,57 +480,42 @@ reliability: "99.9% uptime"
         "Designed and developed a web-based platform to enhance campus safety and emergency management. The system supports real-time incident reporting, alert notifications, equipment management, and centralized monitoring to ensure rapid response and effective coordination during critical situations.",
       longDescription:
         "Designed and developed a web-based platform to enhance campus safety and emergency management. The system supports real-time incident reporting, alert notifications, equipment management, and centralized monitoring to ensure rapid response and effective coordination during critical situations.",
-      tech: ["SpringBoot", "Angular", "MySQL", "Microsoft Azure", "Docker", "Nginx","LoadBalancer"],
-      images: [
-        "incident.png",
-        "azure1.png",
-        "azure2.png",
-      ],
+      tech: ["SpringBoot", "Angular", "MySQL", "Microsoft Azure", "Docker", "Nginx", "LoadBalancer"],
+      images: ["/projects/incident.png", "/projects/azure1.png", "/projects/azure2.png"],
       featured: true,
-      metrics: {
-        system_availability: "99.9%",
-  response_time: "60% faster ", 
-  equipment_tracking: "95% accuracy", 
-      },
+      metrics: { system_availability: "99.9%", response_time: "60% faster ", equipment_tracking: "95% accuracy" },
     },
   ]
-
-  const stats = [
+  const stats: Stat[] = [
     { label: "Fresh Graduate", value: "2025", icon: <Calendar className="h-6 w-6" /> },
     { label: "Projects Built", value: "10+", icon: <Rocket className="h-6 w-6" /> },
     { label: "Technologies Learned", value: "25+", icon: <TrendingUp className="h-6 w-6" /> },
     { label: "Certifications", value: "2+", icon: <Award className="h-6 w-6" /> },
   ]
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
   }
-
-  const openGallery = (project: any, imageIndex = 0) => {
+  const openGallery = (project: Project, imageIndex = 0) => {
     setSelectedProject(project)
     setCurrentImageIndex(imageIndex)
   }
-
   const closeGallery = () => {
     setSelectedProject(null)
     setCurrentImageIndex(0)
   }
-
   const nextImage = () => {
     if (selectedProject) {
       setCurrentImageIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1))
     }
   }
-
   const prevImage = () => {
     if (selectedProject) {
       setCurrentImageIndex((prev) => (prev === 0 ? selectedProject.images.length - 1 : prev - 1))
     }
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-x-hidden">
       {/* Animated Background with Particles */}
@@ -520,7 +525,6 @@ reliability: "99.9% uptime"
           <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
           <div className="absolute bottom-1/4 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
         </div>
-
         {/* Floating Particles */}
         {isMounted && (
           <div className="absolute inset-0">
@@ -539,7 +543,6 @@ reliability: "99.9% uptime"
           </div>
         )}
       </div>
-
       {/* Enhanced Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-black/10 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
         <div className="container mx-auto px-6 py-4">
@@ -559,7 +562,6 @@ reliability: "99.9% uptime"
                 <p className="text-white/60 text-sm">IT Engineer specialized in IT Architecture, DevOps, and Cloud Computing</p>
               </div>
             </div>
-
             <div className="hidden md:flex items-center space-x-8">
               {["about", "skills", "certifications", "experience", "projects", "contact"].map((section) => (
                 <button
@@ -578,7 +580,6 @@ reliability: "99.9% uptime"
                 </button>
               ))}
             </div>
-
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
@@ -614,7 +615,6 @@ reliability: "99.9% uptime"
           </div>
         </div>
       </nav>
-
       {/* Hero Section */}
       <section ref={heroRef} id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20">
         <div className="container mx-auto max-w-6xl">
@@ -630,7 +630,6 @@ reliability: "99.9% uptime"
                   <Sparkles className="h-5 w-5 animate-pulse" />
                   <span>Welcome to my digital space</span>
                 </div>
-
                 <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
                   <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
                     Hmaidi
@@ -638,16 +637,17 @@ reliability: "99.9% uptime"
                   <br />
                   <span className="text-white">Mohamed</span>
                 </h1>
-
                 <div className="space-y-2">
                   <p className="text-2xl md:text-3xl text-white/90 font-light">Junior DevOps & Cloud Engineer</p>
                   <p className="text-lg text-white/70 max-w-xl leading-relaxed">
-I’m a fresh graduate passionate about DevOps, cloud technologies, and IT architecture. I enjoy working on automation, building scalable systems, and using modern tools to improve how things run.
-
-With a background in business intelligence and some experience in web development, I like combining data, code, and infrastructure automation to create smart and efficient solutions. I’m excited to keep learning and contribute to real projects.</p>
+                    I’m a fresh graduate passionate about DevOps, cloud technologies, and IT architecture. I enjoy working
+                    on automation, building scalable systems, and using modern tools to improve how things run.With a
+                    background in business intelligence and some experience in web development, I like combining data,
+                    code, and infrastructure automation to create smart and efficient solutions. I’m excited to keep
+                    learning and contribute to real projects.
+                  </p>
                 </div>
               </div>
-
               {/* Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {stats.map((stat, index) => (
@@ -662,7 +662,6 @@ With a background in business intelligence and some experience in web developmen
                   </div>
                 ))}
               </div>
-
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -684,7 +683,6 @@ With a background in business intelligence and some experience in web developmen
                 </Button>
               </div>
             </div>
-
             {/* Right Content - 3D Profile */}
             <div
               className={`relative transform transition-all duration-1000 delay-300 ${
@@ -695,29 +693,27 @@ With a background in business intelligence and some experience in web developmen
                 {/* Floating Elements */}
                 <div className="absolute -top-10 -left-10 w-20 h-20 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
                 <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float animation-delay-2000"></div>
-
                 {/* Main Profile Container */}
                 <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
                   <div className="relative">
                     <div className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-400 p-1 transform hover:scale-105 transition-all duration-500">
                       <Image
-                        src="2222-removebg-preview.png"
+                        src="/2222-removebg-preview.png"
                         alt="Hmaidi Mohamed - DevOps Engineer"
                         width={320}
                         height={320}
                         className="rounded-2xl object-cover w-full h-full"
                       />
                     </div>
-
                     {/* Floating Tech Icons */}
                     <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center animate-bounce">
-                      <Cloud className="h-6 w-6 text-white" />
+                      <Cloud className="h-6 w-6" />
                     </div>
                     <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center animate-bounce animation-delay-1000">
-                      <Container className="h-6 w-6 text-white" />
+                      <Container className="h-6 w-6" />
                     </div>
                     <div className="absolute top-1/2 -right-8 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
-                      <Code className="h-5 w-5 text-white" />
+                      <Code className="h-5 w-5" />
                     </div>
                   </div>
                 </div>
@@ -725,12 +721,10 @@ With a background in business intelligence and some experience in web developmen
             </div>
           </div>
         </div>
-
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <ChevronDown className="h-8 w-8 text-white/60" />
         </div>
       </section>
-
       {/* About Section */}
       <section id="about" className="relative py-24 px-6">
         <div className="container mx-auto max-w-6xl">
@@ -740,57 +734,54 @@ With a background in business intelligence and some experience in web developmen
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Me</span>
             </h2>
           </div>
-
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-  {[
-    {
-  icon: <Cloud className="h-12 w-12" />,
-  title: "DevOps & Cloud Engineer",
-  description:
-    "Focused on building scalable, reliable, and automated infrastructure that ensures high availability and supports efficient software delivery",
-  color: "from-blue-500 to-indigo-500",
-},
-  {
-    icon: <Zap className="h-12 w-12" />,
-    title: "Automation Focused",
-    description:
-      "Automating tasks from infrastructure provisioning to CI/CD pipelines, reducing manual steps and improving delivery speed",
-    color: "from-yellow-500 to-orange-500",
-  },
-  {
-    icon: <BarChart className="h-12 w-12" />,
-    title: "Data & Insights",
-    description:
-      "Understanding and working with data to support decision-making, extract insights, and improve business outcomes",
-    color: "from-teal-500 to-cyan-500",
-  },
-  {
-    icon: <Code className="h-12 w-12" />,
-    title: "Web Development",
-    description:
-      "Creating user-friendly and responsive web experiences with a focus on performance, accessibility, and clean design",
-    color: "from-purple-500 to-fuchsia-500",
-  },
-  ].map((item, index) => (
-    <Card
-      key={index}
-      className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 animate-fade-in-up group"
-      style={{ animationDelay: `${index * 200}ms` }}
-    >
-      <CardContent className="p-8 text-center">
-        <div
-          className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${item.color} mb-6 group-hover:scale-110 transition-transform duration-300`}
-        >
-          <div className="text-white">{item.icon}</div>
-        </div>
-        <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
-        <p className="text-white/70 leading-relaxed">{item.description}</p>
-      </CardContent>
-    </Card>
-  ))}
-</div>
-
-
+            {[
+              {
+                icon: <Cloud className="h-12 w-12" />,
+                title: "DevOps & Cloud Engineer",
+                description:
+                  "Focused on building scalable, reliable, and automated infrastructure that ensures high availability and supports efficient software delivery",
+                color: "from-blue-500 to-indigo-500",
+              },
+              {
+                icon: <Zap className="h-12 w-12" />,
+                title: "Automation Focused",
+                description:
+                  "Automating tasks from infrastructure provisioning to CI/CD pipelines, reducing manual steps and improving delivery speed",
+                color: "from-yellow-500 to-orange-500",
+              },
+              {
+                icon: <BarChart className="h-12 w-12" />,
+                title: "Data & Insights",
+                description:
+                  "Understanding and working with data to support decision-making, extract insights, and improve business outcomes",
+                color: "from-teal-500 to-cyan-500",
+              },
+              {
+                icon: <Code className="h-12 w-12" />,
+                title: "Web Development",
+                description:
+                  "Creating user-friendly and responsive web experiences with a focus on performance, accessibility, and clean design",
+                color: "from-purple-500 to-fuchsia-500",
+              },
+            ].map((item, index) => (
+              <Card
+                key={index}
+                className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 animate-fade-in-up group"
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                <CardContent className="p-8 text-center">
+                  <div
+                    className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${item.color} mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <div className="text-white">{item.icon}</div>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+                  <p className="text-white/70 leading-relaxed">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
           {/* Education Section */}
           <div className="mt-24">
             <div className="text-center mb-16">
@@ -799,10 +790,10 @@ With a background in business intelligence and some experience in web developmen
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Path</span>
               </h2>
               <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
-               My academic background has provided me with a strong foundation in computer science, cloud technologies, DevOps practices, data management, and web development.
+                My academic background has provided me with a strong foundation in computer science, cloud technologies,
+                DevOps practices, data management, and web development.
               </p>
             </div>
-
             <div className="space-y-8">
               {education.map((edu, index) => (
                 <Card
@@ -834,9 +825,7 @@ With a background in business intelligence and some experience in web developmen
                             </div>
                           </div>
                         </div>
-
                         <p className="text-white/80 mb-6 leading-relaxed">{edu.description}</p>
-
                         <div className="space-y-3">
                           <h4 className="text-white font-semibold mb-3 flex items-center">
                             <BookOpen className="h-4 w-4 text-cyan-400 mr-2" />
@@ -852,7 +841,6 @@ With a background in business intelligence and some experience in web developmen
                           ))}
                         </div>
                       </div>
-
                       <div className="space-y-4">
                         <h4 className="text-white font-semibold">Relevant Skills</h4>
                         <div className="flex flex-wrap gap-2">
@@ -874,7 +862,6 @@ With a background in business intelligence and some experience in web developmen
           </div>
         </div>
       </section>
-
       {/* Enhanced Skills Section */}
       <section id="skills" className="relative py-24 px-6 bg-black/20">
         <div className="container mx-auto max-w-6xl">
@@ -889,7 +876,6 @@ With a background in business intelligence and some experience in web developmen
               Mastering the tools and technologies that drive modern infrastructure and cloud-native applications
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skillGroup, index) => (
               <Card
@@ -930,7 +916,6 @@ With a background in business intelligence and some experience in web developmen
           </div>
         </div>
       </section>
-
       {/* Certifications Section */}
       <section id="certifications" className="relative py-24 px-6">
         <div className="container mx-auto max-w-6xl">
@@ -946,7 +931,6 @@ With a background in business intelligence and some experience in web developmen
               continuous learning and professional development
             </p>
           </div>
-
           <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {certifications.map((cert, index) => (
               <Card
@@ -972,7 +956,6 @@ With a background in business intelligence and some experience in web developmen
                         </div>
                       </div>
                     </div>
-
                     {/* Certification Details */}
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-3">
@@ -993,9 +976,7 @@ With a background in business intelligence and some experience in web developmen
                           <span className="text-green-400 text-sm font-medium">Verified</span>
                         </div>
                       </div>
-
                       <p className="text-white/80 mb-4 leading-relaxed">{cert.description}</p>
-
                       {/* Skills Covered */}
                       <div className="mb-4">
                         <h4 className="text-white font-semibold mb-2 text-sm">Skills Covered:</h4>
@@ -1010,7 +991,6 @@ With a background in business intelligence and some experience in web developmen
                           ))}
                         </div>
                       </div>
-
                       {/* Credential Link */}
                       <Button
                         variant="outline"
@@ -1029,7 +1009,6 @@ With a background in business intelligence and some experience in web developmen
               </Card>
             ))}
           </div>
-
           {/* Future Certifications */}
           <div className="mt-16 text-center">
             <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-3xl p-8 backdrop-blur-sm border border-white/10 max-w-2xl mx-auto">
@@ -1052,7 +1031,6 @@ With a background in business intelligence and some experience in web developmen
           </div>
         </div>
       </section>
-
       {/* Enhanced Experience Section */}
       <section id="experience" className="relative py-24 px-6 bg-black/20">
         <div className="container mx-auto max-w-6xl">
@@ -1063,9 +1041,7 @@ With a background in business intelligence and some experience in web developmen
                 Journey
               </span>
             </h2>
-           
           </div>
-
           <div className="space-y-8">
             {experience.map((exp, index) => (
               <Card
@@ -1097,9 +1073,7 @@ With a background in business intelligence and some experience in web developmen
                           </div>
                         </div>
                       </div>
-
                       <p className="text-white/80 mb-6 leading-relaxed">{exp.description}</p>
-
                       <div className="space-y-3">
                         <h4 className="text-white font-semibold mb-3 flex items-center">
                           <Award className="h-4 w-4 text-cyan-400 mr-2" />
@@ -1115,7 +1089,6 @@ With a background in business intelligence and some experience in web developmen
                         ))}
                       </div>
                     </div>
-
                     <div className="space-y-4">
                       <h4 className="text-white font-semibold">Technologies Used</h4>
                       <div className="flex flex-wrap gap-2">
@@ -1136,7 +1109,6 @@ With a background in business intelligence and some experience in web developmen
           </div>
         </div>
       </section>
-
       {/* Enhanced Projects Section */}
       <section id="projects" className="relative py-24 px-6">
         <div className="container mx-auto max-w-6xl">
@@ -1151,7 +1123,6 @@ With a background in business intelligence and some experience in web developmen
               Showcasing innovative solutions that drive business success and technical excellence
             </p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <Card
@@ -1170,7 +1141,6 @@ With a background in business intelligence and some experience in web developmen
                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
                   {/* Project Metrics Overlay */}
                   <div className="absolute top-4 left-4 space-y-2">
                     {project.featured && (
@@ -1180,14 +1150,12 @@ With a background in business intelligence and some experience in web developmen
                       </Badge>
                     )}
                   </div>
-
                   {/* Gallery indicator */}
                   {project.images.length > 1 && (
                     <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
                       {project.images.length} photos
                     </div>
                   )}
-
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="text-white text-center">
@@ -1198,16 +1166,13 @@ With a background in business intelligence and some experience in web developmen
                     </div>
                   </div>
                 </div>
-
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
                       {project.title}
                     </h3>
                   </div>
-
                   <p className="text-white/70 mb-4 leading-relaxed">{project.description}</p>
-
                   {/* Project Metrics */}
                   {project.metrics && (
                     <div className="grid grid-cols-3 gap-4 mb-4 p-3 bg-white/5 rounded-lg">
@@ -1219,7 +1184,6 @@ With a background in business intelligence and some experience in web developmen
                       ))}
                     </div>
                   )}
-
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech, techIndex) => (
                       <Badge
@@ -1231,15 +1195,12 @@ With a background in business intelligence and some experience in web developmen
                       </Badge>
                     ))}
                   </div>
-
-              
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
-
       {/* Enhanced Contact Section */}
       <section id="contact" className="relative py-24 px-6 bg-black/20">
         <div className="container mx-auto max-w-6xl">
@@ -1255,7 +1216,6 @@ With a background in business intelligence and some experience in web developmen
               together.
             </p>
           </div>
-
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div className="space-y-8 animate-fade-in-up animation-delay-500">
@@ -1301,7 +1261,6 @@ With a background in business intelligence and some experience in web developmen
                   </div>
                 ))}
               </div>
-
               {/* Social Links */}
               <div className="pt-8 border-t border-white/10">
                 <h3 className="text-white font-semibold text-lg mb-4">Connect with me</h3>
@@ -1326,45 +1285,41 @@ With a background in business intelligence and some experience in web developmen
                 </div>
               </div>
             </div>
-
-           {/* Contact Photo */}
-<div className="relative animate-fade-in-up animation-delay-700">
-  <div className="relative">
-    {/* Floating Elements */}
-    <div className="absolute -top-10 -left-10 w-20 h-20 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
-    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float animation-delay-2000"></div>
-
-    {/* Main Photo Container */}
-    <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10 hover-glow">
-      <div className="relative">
-        <div className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-400 p-1 transform hover:scale-105 transition-all duration-500">
-          <Image
-            src="mohamedhm.jpeg" // Replace with the actual path to your photo
-            alt="Hmaidi Mohamed - Contact Photo"
-            width={320}
-            height={320}
-            className="rounded-2xl object-cover w-full h-full"
-          />
-        </div>
-
-        {/* Floating Tech Icons */}
-        <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center animate-bounce">
-          <Cloud className="h-6 w-6 text-white" />
-        </div>
-        <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center animate-bounce animation-delay-1000">
-          <Container className="h-6 w-6 text-white" />
-        </div>
-        <div className="absolute top-1/2 -right-8 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
-          <Code className="h-5 w-5 text-white" />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            {/* Contact Photo */}
+            <div className="relative animate-fade-in-up animation-delay-700">
+              <div className="relative">
+                {/* Floating Elements */}
+                <div className="absolute -top-10 -left-10 w-20 h-20 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
+                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float animation-delay-2000"></div>
+                {/* Main Photo Container */}
+                <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10 hover-glow">
+                  <div className="relative">
+                    <div className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-400 p-1 transform hover:scale-105 transition-all duration-500">
+                      <Image
+                        src="/mohamedhm.jpeg" // Replace with the actual path to your photo
+                        alt="Hmaidi Mohamed - Contact Photo"
+                        width={320}
+                        height={320}
+                        className="rounded-2xl object-cover w-full h-full"
+                      />
+                    </div>
+                    {/* Floating Tech Icons */}
+                    <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center animate-bounce">
+                      <Cloud className="h-6 w-6" />
+                    </div>
+                    <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center animate-bounce animation-delay-1000">
+                      <Container className="h-6 w-6" />
+                    </div>
+                    <div className="absolute top-1/2 -right-8 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
+                      <Code className="h-5 w-5" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
       {/* Enhanced Footer */}
       <footer className="relative py-12 px-6 border-t border-white/10">
         <div className="container mx-auto max-w-6xl">
@@ -1378,11 +1333,7 @@ With a background in business intelligence and some experience in web developmen
                 <p className="text-white/60 text-sm">Junior Cloud & DevOps Engineer</p>
               </div>
             </div>
-
-            <p className="text-white/60 text-center mb-4 md:mb-0">
-              © 2025 Hmaidi Mohamed.
-            </p>
-
+            <p className="text-white/60 text-center mb-4 md:mb-0">© 2025 Hmaidi Mohamed.</p>
             <div className="flex items-center space-x-4">
               <Link
                 href="https://github.com/MohamedHmaidi"
@@ -1408,7 +1359,6 @@ With a background in business intelligence and some experience in web developmen
           </div>
         </div>
       </footer>
-
       {/* Enhanced Gallery Modal */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
@@ -1420,7 +1370,6 @@ With a background in business intelligence and some experience in web developmen
             >
               <X className="h-6 w-6" />
             </button>
-
             {/* Image */}
             <div className="relative">
               <Image
@@ -1430,7 +1379,6 @@ With a background in business intelligence and some experience in web developmen
                 height={800}
                 className="w-full h-auto max-h-[70vh] object-contain rounded-2xl"
               />
-
               {/* Navigation arrows */}
               {selectedProject.images.length > 1 && (
                 <>
@@ -1449,14 +1397,12 @@ With a background in business intelligence and some experience in web developmen
                 </>
               )}
             </div>
-
             {/* Project info */}
             <div className="mt-8 text-center">
               <h3 className="text-3xl font-bold text-white mb-4">{selectedProject.title}</h3>
               <p className="text-white/80 mb-6 max-w-3xl mx-auto leading-relaxed">
                 {selectedProject.longDescription || selectedProject.description}
               </p>
-
               {/* Project Metrics */}
               {selectedProject.metrics && (
                 <div className="grid grid-cols-3 gap-6 mb-6 max-w-md mx-auto">
@@ -1468,7 +1414,6 @@ With a background in business intelligence and some experience in web developmen
                   ))}
                 </div>
               )}
-
               {/* Image counter */}
               {selectedProject.images.length > 1 && (
                 <div className="flex justify-center space-x-2 mb-6">
@@ -1483,7 +1428,6 @@ With a background in business intelligence and some experience in web developmen
                   ))}
                 </div>
               )}
-
               <div className="flex flex-wrap gap-3 justify-center mb-6">
                 {selectedProject.tech.map((tech, techIndex) => (
                   <Badge
@@ -1494,7 +1438,6 @@ With a background in business intelligence and some experience in web developmen
                   </Badge>
                 ))}
               </div>
-
             </div>
           </div>
         </div>
