@@ -1361,87 +1361,108 @@ export default function ProfessionalDevOpsPortfolio() {
       </footer>
       {/* Enhanced Gallery Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative max-w-6xl w-full">
-            {/* Close button */}
+  <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="relative max-w-4xl w-full">
+      {/* Close button - Dark version */}
+      <button
+        onClick={closeGallery}
+        className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
+      >
+        <X className="h-5 w-5" />
+      </button>
+      
+      {/* Image container with fixed size */}
+      <div className="relative w-full h-[400px] flex items-center justify-center"> {/* Fixed height container */}
+        <Image
+          src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
+          alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+          width={700}  // Fixed width
+          height={400} // Fixed height
+          className="object-contain rounded-lg" // Removed responsive sizing
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            width: 'auto',
+            height: 'auto'
+          }}
+        />
+        
+        {/* Navigation arrows - Dark version */}
+        {selectedProject.images.length > 1 && (
+          <>
             <button
-              onClick={closeGallery}
-              className="absolute top-4 right-4 z-10 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
             >
-              <X className="h-6 w-6" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
-            {/* Image */}
-            <div className="relative">
-              <Image
-                src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
-                alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                width={1200}
-                height={800}
-                className="w-full h-auto max-h-[70vh] object-contain rounded-2xl"
-              />
-              {/* Navigation arrows */}
-              {selectedProject.images.length > 1 && (
-                <>
-                  <button
-                    onClick={prevImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
-                  >
-                    <ChevronLeft className="h-6 w-6" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
-                  >
-                    <ChevronRight className="h-6 w-6" />
-                  </button>
-                </>
-              )}
-            </div>
-            {/* Project info */}
-            <div className="mt-8 text-center">
-              <h3 className="text-3xl font-bold text-white mb-4">{selectedProject.title}</h3>
-              <p className="text-white/80 mb-6 max-w-3xl mx-auto leading-relaxed">
-                {selectedProject.longDescription || selectedProject.description}
-              </p>
-              {/* Project Metrics */}
-              {selectedProject.metrics && (
-                <div className="grid grid-cols-3 gap-6 mb-6 max-w-md mx-auto">
-                  {Object.entries(selectedProject.metrics).map(([key, value], metricIndex) => (
-                    <div key={metricIndex} className="text-center p-4 bg-white/5 rounded-xl">
-                      <div className="text-cyan-400 font-bold text-lg">{value}</div>
-                      <div className="text-white/60 text-sm capitalize">{key.replace("_", " ")}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {/* Image counter */}
-              {selectedProject.images.length > 1 && (
-                <div className="flex justify-center space-x-2 mb-6">
-                  {selectedProject.images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex ? "bg-cyan-400 scale-125" : "bg-white/30 hover:bg-white/50"
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
-              <div className="flex flex-wrap gap-3 justify-center mb-6">
-                {selectedProject.tech.map((tech, techIndex) => (
-                  <Badge
-                    key={techIndex}
-                    className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30"
-                  >
-                    {tech}
-                  </Badge>
-                ))}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </>
+        )}
+      </div>
+      
+      {/* Project info */}
+      <div className="mt-6 text-center">
+        <h3 className="text-2xl font-bold text-white mb-3">{selectedProject.title}</h3>
+        <p className="text-white/80 mb-4 max-w-2xl mx-auto text-sm leading-relaxed">
+          {selectedProject.longDescription || selectedProject.description}
+        </p>
+        
+        {/* Project Metrics */}
+        {selectedProject.metrics && (
+          <div className="grid grid-cols-3 gap-4 mb-4 max-w-md mx-auto">
+            {Object.entries(selectedProject.metrics).map(([key, value], metricIndex) => (
+              <div key={metricIndex} className="text-center p-3 bg-white/5 rounded-lg">
+                <div className="text-cyan-400 font-bold text-md">{value}</div>
+                <div className="text-white/60 text-xs capitalize">{key.replace("_", " ")}</div>
               </div>
-            </div>
+            ))}
           </div>
+        )}
+        
+        {/* Image counter */}
+        {selectedProject.images.length > 1 && (
+          <div className="flex justify-center space-x-2 mb-4">
+            {selectedProject.images.map((_, index) => (
+              <button
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentImageIndex ? "bg-cyan-400 scale-125" : "bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+        
+        <div className="flex flex-wrap gap-2 justify-center mb-4">
+          {selectedProject.tech.map((tech, techIndex) => (
+            <Badge
+              key={techIndex}
+              className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 text-xs"
+            >
+              {tech}
+            </Badge>
+          ))}
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
     </div>
   )
 }
