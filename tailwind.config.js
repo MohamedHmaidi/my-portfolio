@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}', // Scan all files in the app directory
-    './components/**/*.{js,ts,jsx,tsx}', // Scan components directory (for Shadcn UI or custom components)
-    './components/ui/**/*.{js,ts,jsx,tsx}', // Include Shadcn UI components
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-};
+}
