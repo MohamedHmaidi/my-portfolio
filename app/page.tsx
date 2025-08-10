@@ -768,7 +768,7 @@ const projects: Project[] = [
                   className="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white border-0 transform hover:scale-105 transition-all duration-300"
                   asChild
                 >
-                  <Link href="#" target="_blank">
+                <Link href="MOHAMED-HMAIDI_CV_EN.pdf" target="_blank">
                     <Download className="mr-2 h-4 w-4" />
                     Resume
                   </Link>
