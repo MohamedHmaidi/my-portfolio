@@ -782,7 +782,8 @@ const projects: Project[] = [
                   className="text-white hover:text-cyan-400 hover:bg-white/10 transition-all duration-300"
                   asChild
                 >
-                  <Link href="#" target="_blank">
+                                  <Link href="MOHAMED-HMAIDI_CV_EN.pdf" target="_blank">
+
                     <Download className="h-4 w-4" />
                   </Link>
                 </Button>
