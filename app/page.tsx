@@ -1,12 +1,44 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Layout, Brain, Laptop, Terminal, BarChart, User, Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Cloud, Server, Shield, Zap, GitBranch, Monitor, ChevronDown, Send, Calendar, Building, Award, Container, FileCode, X, ChevronLeft, ChevronRight, Download, Code, Sparkles, Rocket, Target, TrendingUp, Globe, CheckCircle, BookOpen } from 'lucide-react'
+import {
+  Brain,
+  Terminal,
+  BarChart,
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin,
+  ExternalLink,
+  Cloud,
+  Server,
+  Zap,
+  GitBranch,
+  Monitor,
+  ChevronDown,
+  Calendar,
+  Building,
+  Award,
+  Container,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Code,
+  Sparkles,
+  Rocket,
+  TrendingUp,
+  Globe,
+  CheckCircle,
+  BookOpen,
+  Menu,
+} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -90,6 +122,7 @@ export default function ProfessionalDevOpsPortfolio() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const heroRef = useRef<HTMLElement>(null)
   const [isMounted, setIsMounted] = useState(false)
 
@@ -97,12 +130,15 @@ export default function ProfessionalDevOpsPortfolio() {
     setIsMounted(true)
     setIsLoaded(true)
     setIsVisible(true)
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
+
     const handleScroll = () => {
       const sections = ["hero", "about", "skills", "certifications", "experience", "projects", "contact"]
       const scrollPosition = window.scrollY + 100
+
       for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
@@ -114,8 +150,10 @@ export default function ProfessionalDevOpsPortfolio() {
         }
       }
     }
+
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("scroll", handleScroll)
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("scroll", handleScroll)
@@ -228,6 +266,7 @@ export default function ProfessionalDevOpsPortfolio() {
       color: "from-indigo-500 to-purple-500",
     },
   ]
+
   const certifications: Certification[] = [
     {
       name: "Microsoft Azure Fundamentals",
@@ -246,12 +285,14 @@ export default function ProfessionalDevOpsPortfolio() {
       issuer: "Amazon web service",
       date: "2023",
       logo: "/logos/aws.png",
-      description: "Foundational knowledge of cloud computing concepts, AWS core services, global infrastructure, security.",
+      description:
+        "Foundational knowledge of cloud computing concepts, AWS core services, global infrastructure, security.",
       skills: ["Cloud Computing", "AWS Services", "Security", "Compliance", "Cloud Pricing"],
       credentialUrl: "https://www.credly.com/badges/00309431-1def-4660-96ab-f77cbbf23321/public_url", // Replace with actual credential URL
       color: "from-blue-500 to-cyan-500",
     },
   ]
+
   const education: EducationEntry[] = [
     {
       degree: "Engineering degree in Cloud Computing and IT Architecture",
@@ -333,6 +374,7 @@ export default function ProfessionalDevOpsPortfolio() {
       color: "from-purple-500 to-pink-500",
     },
   ]
+
   const experience: ExperienceEntry[] = [
     {
       title: "Cloud & DevOps Engineer Intern: DBaaS Platform",
@@ -426,9 +468,9 @@ export default function ProfessionalDevOpsPortfolio() {
       period: "02/2022 - 06/2022",
       location: "Tunis, Tunisia",
       description:
-        "Designed a dashboard for monitoring BIAT’s Swift processes, integrating a data warehouse for data processing and visualization. Data processing involved cleaning, integration, and ETL with Talend, followed by visualization in Power BI.",
+        "Designed a dashboard for monitoring BIAT's Swift processes, integrating a data warehouse for data processing and visualization. Data processing involved cleaning, integration, and ETL with Talend, followed by visualization in Power BI.",
       achievements: [
-        "Designed a dashboard for monitoring BIAT’s Swift processes",
+        "Designed a dashboard for monitoring BIAT's Swift processes",
         "Integrated a data warehouse for efficient data processing",
         "Performed data cleaning, integration, and ETL using Talend",
         "Created visualizations using Power BI for actionable insights",
@@ -436,6 +478,7 @@ export default function ProfessionalDevOpsPortfolio() {
       technologies: ["Java", "Talend", "Power BI", "Excel", "PostgreSQL"],
     },
   ]
+
   const projects: Project[] = [
     {
       title: "Cloud Infrastructure and Orchestration with OpenStack",
@@ -443,7 +486,19 @@ export default function ProfessionalDevOpsPortfolio() {
         "Designed and deployed a scalable multi-node cloud infrastructure supporting virtualized resources and container workloads. Automated environment setup and configured a cluster for efficient workload management. Implemented monitoring to optimize performance and ensure high availability.",
       longDescription:
         "Designed and deployed a scalable multi-node cloud infrastructure supporting virtualized resources and container workloads. Automated environment setup and configured a cluster for efficient workload management. Implemented monitoring to optimize performance and ensure high availability.",
-      tech: ["Openstack", "Keystone", "Nova", "Glance", "Magnum", "Heat", "Swift", "Ansible", "Kubernetes", "Prometheus", "Grafana"],
+      tech: [
+        "Openstack",
+        "Keystone",
+        "Nova",
+        "Glance",
+        "Magnum",
+        "Heat",
+        "Swift",
+        "Ansible",
+        "Kubernetes",
+        "Prometheus",
+        "Grafana",
+      ],
       images: ["/projects/openstack1.png", "/projects/openstack2.png", "/projects/openstack3.png"],
       featured: true,
       metrics: { automation: "95% with Ansible", scalability: "Up to 10 nodes", monitoring: "Full coverage" },
@@ -472,7 +527,11 @@ export default function ProfessionalDevOpsPortfolio() {
       ],
       images: ["/projects/Jenkins.png", "/projects/jenkins2.png"],
       featured: false,
-      metrics: { automation: "95% with CI/CD pipeline", monitoring: "Full coverage with email notifications", reliability: "99.9% uptime" },
+      metrics: {
+        automation: "95% ",
+        monitoring: "Full coverage ",
+        reliability: "99.9% uptime",
+      },
     },
     {
       title: "CSERS - ESPRIT Campus Security and Emergency System Deployed Microsoft Azure",
@@ -486,36 +545,44 @@ export default function ProfessionalDevOpsPortfolio() {
       metrics: { system_availability: "99.9%", response_time: "60% faster ", equipment_tracking: "95% accuracy" },
     },
   ]
+
   const stats: Stat[] = [
     { label: "Fresh Graduate", value: "2025", icon: <Calendar className="h-6 w-6" /> },
     { label: "Projects Built", value: "10+", icon: <Rocket className="h-6 w-6" /> },
     { label: "Technologies Learned", value: "25+", icon: <TrendingUp className="h-6 w-6" /> },
     { label: "Certifications", value: "2+", icon: <Award className="h-6 w-6" /> },
   ]
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
+    setIsMobileMenuOpen(false)
   }
+
   const openGallery = (project: Project, imageIndex = 0) => {
     setSelectedProject(project)
     setCurrentImageIndex(imageIndex)
   }
+
   const closeGallery = () => {
     setSelectedProject(null)
     setCurrentImageIndex(0)
   }
+
   const nextImage = () => {
     if (selectedProject) {
       setCurrentImageIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1))
     }
   }
+
   const prevImage = () => {
     if (selectedProject) {
       setCurrentImageIndex((prev) => (prev === 0 ? selectedProject.images.length - 1 : prev - 1))
     }
   }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-x-hidden">
       {/* Animated Background with Particles */}
@@ -543,26 +610,36 @@ export default function ProfessionalDevOpsPortfolio() {
           </div>
         )}
       </div>
+
       {/* Enhanced Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-black/10 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-xl flex items-center justify-center transform hover:scale-110 transition-all duration-300">
-                  <Server className="h-6 w-6 text-white" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-xl flex items-center justify-center transform hover:scale-110 transition-all duration-300">
+                  <Server className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-400 rounded-full animate-ping"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-400 rounded-full"></div>
               </div>
-              <div>
-                <span className="text-white font-bold text-xl bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              <div className="hidden sm:block">
+                <span className="text-white font-bold text-lg sm:text-xl bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                   Hmaidi Mohamed
                 </span>
-                <p className="text-white/60 text-sm">IT Engineer specialized in IT Architecture, DevOps, and Cloud Computing</p>
+                <p className="text-white/60 text-xs sm:text-sm">
+                  IT Engineer specialized in IT Architecture, DevOps, and Cloud Computing
+                </p>
+              </div>
+              <div className="block sm:hidden">
+                <span className="text-white font-bold text-lg bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  Hmaidi Mohamed
+                </span>
               </div>
             </div>
-            <div className="hidden md:flex items-center space-x-8">
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-8">
               {["about", "skills", "certifications", "experience", "projects", "contact"].map((section) => (
                 <button
                   key={section}
@@ -580,7 +657,9 @@ export default function ProfessionalDevOpsPortfolio() {
                 </button>
               ))}
             </div>
-            <div className="flex items-center space-x-4">
+
+            {/* Desktop Action Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
               <Button
                 variant="ghost"
                 size="sm"
@@ -612,25 +691,87 @@ export default function ProfessionalDevOpsPortfolio() {
                 </Link>
               </Button>
             </div>
+
+            {/* Mobile Menu Button */}
+            <div className="flex items-center space-x-2 md:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-white hover:text-cyan-400 hover:bg-white/10 transition-all duration-300"
+                asChild
+              >
+                <Link href="MOHAMED-HMAIDI_CV_EN.pdf" target="_blank">
+                  <Download className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-white hover:text-cyan-400 hover:bg-white/10 transition-all duration-300"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-white/10">
+              <div className="flex flex-col space-y-4 pt-4">
+                {["about", "skills", "certifications", "experience", "projects", "contact"].map((section) => (
+                  <button
+                    key={section}
+                    onClick={() => scrollToSection(section)}
+                    className={`text-left text-sm font-medium transition-all duration-300 hover:text-cyan-400 ${
+                      activeSection === section ? "text-cyan-400" : "text-white/80"
+                    }`}
+                  >
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                  </button>
+                ))}
+                <div className="flex items-center space-x-4 pt-2">
+                  <Link
+                    href="https://github.com/MohamedHmaidi"
+                    target="_blank"
+                    className="text-white/60 hover:text-cyan-400 transition-colors duration-300"
+                  >
+                    <Github className="h-5 w-5" />
+                  </Link>
+                  <Link
+                    href="https://www.linkedin.com/in/mohamed-hmaidi-b3b1741b2/"
+                    target="_blank"
+                    className="text-white/60 hover:text-cyan-400 transition-colors duration-300"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
+
       {/* Hero Section */}
-      <section ref={heroRef} id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20">
+      <section
+        ref={heroRef}
+        id="hero"
+        className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20"
+      >
         <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Content */}
             <div
-              className={`space-y-8 transform transition-all duration-1000 ${
+              className={`space-y-6 lg:space-y-8 transform transition-all duration-1000 ${
                 isVisible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
               }`}
             >
               <div className="space-y-4">
                 <div className="flex items-center space-x-2 text-cyan-400 font-medium">
-                  <Sparkles className="h-5 w-5 animate-pulse" />
-                  <span>Welcome to my digital space</span>
+                  <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
+                  <span className="text-sm sm:text-base">Welcome to my digital space</span>
                 </div>
-                <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                   <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
                     Hmaidi
                   </span>
@@ -638,27 +779,29 @@ export default function ProfessionalDevOpsPortfolio() {
                   <span className="text-white">Mohamed</span>
                 </h1>
                 <div className="space-y-2">
-                  <p className="text-2xl md:text-3xl text-white/90 font-light">Junior DevOps & Cloud Engineer</p>
-                  <p className="text-lg text-white/70 max-w-xl leading-relaxed">
-                    I’m a fresh graduate passionate about DevOps, cloud technologies, and IT architecture. I enjoy working
-                    on automation, building scalable systems, and using modern tools to improve how things run.With a
-                    background in business intelligence and some experience in web development, I like combining data,
-                    code, and infrastructure automation to create smart and efficient solutions. I’m excited to keep
-                    learning and contribute to real projects.
+                  <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light">
+                    Junior DevOps & Cloud Engineer
+                  </p>
+                  <p className="text-base sm:text-lg text-white/70 max-w-xl leading-relaxed">
+                    I'm a fresh graduate passionate about DevOps, cloud technologies, and IT architecture. I enjoy
+                    working on automation, building scalable systems, and using modern tools to improve how things run ,
+                    with a background in business intelligence and some experience in web development, I like combining
+                    data, code, and infrastructure automation to create smart and efficient solutions. I'm excited to
+                    keep learning and contribute to real projects.
                   </p>
                 </div>
               </div>
               {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
+                    className="bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
                     style={{ animationDelay: `${index * 200}ms` }}
                   >
                     <div className="text-cyan-400 mb-2">{stat.icon}</div>
-                    <div className="text-2xl font-bold text-white">{stat.value}</div>
-                    <div className="text-white/60 text-sm">{stat.label}</div>
+                    <div className="text-xl sm:text-2xl font-bold text-white">{stat.value}</div>
+                    <div className="text-white/60 text-xs sm:text-sm">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -691,12 +834,12 @@ export default function ProfessionalDevOpsPortfolio() {
             >
               <div className="relative">
                 {/* Floating Elements */}
-                <div className="absolute -top-10 -left-10 w-20 h-20 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
-                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float animation-delay-2000"></div>
+                <div className="absolute -top-10 -left-10 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
+                <div className="absolute -bottom-10 -right-10 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float animation-delay-2000"></div>
                 {/* Main Profile Container */}
-                <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
+                <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl p-6 sm:p-8 backdrop-blur-sm border border-white/10">
                   <div className="relative">
-                    <div className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-400 p-1 transform hover:scale-105 transition-all duration-500">
+                    <div className="w-64 h-64 sm:w-80 sm:h-80 mx-auto rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-400 p-1 transform hover:scale-105 transition-all duration-500">
                       <Image
                         src="/2222-removebg-preview.png"
                         alt="Hmaidi Mohamed - DevOps Engineer"
@@ -706,14 +849,14 @@ export default function ProfessionalDevOpsPortfolio() {
                       />
                     </div>
                     {/* Floating Tech Icons */}
-                    <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center animate-bounce">
-                      <Cloud className="h-6 w-6" />
+                    <div className="absolute -top-4 -right-4 w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-xl flex items-center justify-center animate-bounce">
+                      <Cloud className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center animate-bounce animation-delay-1000">
-                      <Container className="h-6 w-6" />
+                    <div className="absolute -bottom-4 -left-4 w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-xl flex items-center justify-center animate-bounce animation-delay-1000">
+                      <Container className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <div className="absolute top-1/2 -right-8 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
-                      <Code className="h-5 w-5" />
+                    <div className="absolute top-1/2 -right-6 sm:-right-8 w-8 h-8 sm:w-10 sm:h-10 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
+                      <Code className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                   </div>
                 </div>
@@ -725,40 +868,41 @@ export default function ProfessionalDevOpsPortfolio() {
           <ChevronDown className="h-8 w-8 text-white/60" />
         </div>
       </section>
+
       {/* About Section */}
-      <section id="about" className="relative py-24 px-6">
+      <section id="about" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
               About{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Me</span>
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
             {[
               {
-                icon: <Cloud className="h-12 w-12" />,
+                icon: <Cloud className="h-10 w-10 sm:h-12 sm:w-12" />,
                 title: "DevOps & Cloud Engineer",
                 description:
                   "Focused on building scalable, reliable, and automated infrastructure that ensures high availability and supports efficient software delivery",
                 color: "from-blue-500 to-indigo-500",
               },
               {
-                icon: <Zap className="h-12 w-12" />,
+                icon: <Zap className="h-10 w-10 sm:h-12 sm:w-12" />,
                 title: "Automation Focused",
                 description:
                   "Automating tasks from infrastructure provisioning to CI/CD pipelines, reducing manual steps and improving delivery speed",
                 color: "from-yellow-500 to-orange-500",
               },
               {
-                icon: <BarChart className="h-12 w-12" />,
+                icon: <BarChart className="h-10 w-10 sm:h-12 sm:w-12" />,
                 title: "Data & Insights",
                 description:
                   "Understanding and working with data to support decision-making, extract insights, and improve business outcomes",
                 color: "from-teal-500 to-cyan-500",
               },
               {
-                icon: <Code className="h-12 w-12" />,
+                icon: <Code className="h-10 w-10 sm:h-12 sm:w-12" />,
                 title: "Web Development",
                 description:
                   "Creating user-friendly and responsive web experiences with a focus on performance, accessibility, and clean design",
@@ -770,62 +914,62 @@ export default function ProfessionalDevOpsPortfolio() {
                 className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 animate-fade-in-up group"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <CardContent className="p-8 text-center">
+                <CardContent className="p-6 sm:p-8 text-center">
                   <div
-                    className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${item.color} mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    className={`inline-flex p-3 sm:p-4 rounded-2xl bg-gradient-to-r ${item.color} mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
                     <div className="text-white">{item.icon}</div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
-                  <p className="text-white/70 leading-relaxed">{item.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">{item.title}</h3>
+                  <p className="text-white/70 leading-relaxed text-sm sm:text-base">{item.description}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
           {/* Education Section */}
-          <div className="mt-24">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+          <div className="mt-16 sm:mt-20 lg:mt-24">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
                 Education{" "}
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Path</span>
               </h2>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
+              <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
                 My academic background has provided me with a strong foundation in computer science, cloud technologies,
                 DevOps practices, data management, and web development.
               </p>
             </div>
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {education.map((edu, index) => (
                 <Card
                   key={index}
                   className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 animate-fade-in-up group overflow-hidden"
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
-                  <CardContent className="p-8">
-                    <div className="grid md:grid-cols-3 gap-6">
-                      <div className="md:col-span-2">
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                  <CardContent className="p-6 sm:p-8">
+                    <div className="grid lg:grid-cols-3 gap-6">
+                      <div className="lg:col-span-2">
+                        <div className="flex flex-col mb-4">
                           <div>
-                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
+                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
                               {edu.degree}
                             </h3>
-                            <div className="flex flex-wrap items-center gap-4 text-cyan-400 mb-4">
+                            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-4 text-cyan-400 mb-4">
                               <div className="flex items-center space-x-2">
                                 <Building className="h-4 w-4" />
-                                <span className="font-medium">{edu.institution}</span>
+                                <span className="font-medium text-sm sm:text-base">{edu.institution}</span>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <Calendar className="h-4 w-4" />
-                                <span>{edu.period}</span>
+                                <span className="text-sm sm:text-base">{edu.period}</span>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <MapPin className="h-4 w-4" />
-                                <span>{edu.location}</span>
+                                <span className="text-sm sm:text-base">{edu.location}</span>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <p className="text-white/80 mb-6 leading-relaxed">{edu.description}</p>
+                        <p className="text-white/80 mb-6 leading-relaxed text-sm sm:text-base">{edu.description}</p>
                         <div className="space-y-3">
                           <h4 className="text-white font-semibold mb-3 flex items-center">
                             <BookOpen className="h-4 w-4 text-cyan-400 mr-2" />
@@ -834,7 +978,7 @@ export default function ProfessionalDevOpsPortfolio() {
                           {edu.courses.map((course, courseIndex) => (
                             <div key={courseIndex} className="flex items-start space-x-3 group/course">
                               <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mt-2 group-hover/course:scale-150 transition-transform duration-300" />
-                              <span className="text-white/70 leading-relaxed group-hover/course:text-white transition-colors duration-300">
+                              <span className="text-white/70 leading-relaxed group-hover/course:text-white transition-colors duration-300 text-sm sm:text-base">
                                 {course}
                               </span>
                             </div>
@@ -847,7 +991,7 @@ export default function ProfessionalDevOpsPortfolio() {
                           {edu.skills.map((skill, skillIndex) => (
                             <Badge
                               key={skillIndex}
-                              className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 hover:bg-cyan-400/10 transition-all duration-300"
+                              className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
                             >
                               {skill}
                             </Badge>
@@ -862,21 +1006,22 @@ export default function ProfessionalDevOpsPortfolio() {
           </div>
         </div>
       </section>
+
       {/* Enhanced Skills Section */}
-      <section id="skills" className="relative py-24 px-6 bg-black/20">
+      <section id="skills" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black/20">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
               Technical{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Expertise
               </span>
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
+            <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
               Mastering the tools and technologies that drive modern infrastructure and cloud-native applications
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {skills.map((skillGroup, index) => (
               <Card
                 key={index}
@@ -886,17 +1031,17 @@ export default function ProfessionalDevOpsPortfolio() {
                 <CardHeader>
                   <div className="flex items-center space-x-3">
                     <div
-                      className={`p-3 rounded-xl bg-gradient-to-r ${skillGroup.color} group-hover:scale-110 transition-transform duration-300`}
+                      className={`p-2 sm:p-3 rounded-xl bg-gradient-to-r ${skillGroup.color} group-hover:scale-110 transition-transform duration-300`}
                     >
                       <div className="text-white">{skillGroup.icon}</div>
                     </div>
-                    <CardTitle className="text-white text-lg">{skillGroup.category}</CardTitle>
+                    <CardTitle className="text-white text-base sm:text-lg">{skillGroup.category}</CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-3 sm:space-y-4">
                   {skillGroup.items.map((skill, skillIndex) => (
                     <div key={skillIndex} className="flex items-center space-x-3 group/skill">
-                      <div className="w-8 h-8 flex-shrink-0">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0">
                         <Image
                           src={skill.logo || "/placeholder.svg"}
                           alt={`${skill.name} logo`}
@@ -905,7 +1050,7 @@ export default function ProfessionalDevOpsPortfolio() {
                           className="w-full h-full object-contain group-hover/skill:scale-110 transition-transform duration-300"
                         />
                       </div>
-                      <span className="text-white font-medium group-hover/skill:text-cyan-100 transition-colors duration-300">
+                      <span className="text-white font-medium group-hover/skill:text-cyan-100 transition-colors duration-300 text-sm sm:text-base">
                         {skill.name}
                       </span>
                     </div>
@@ -916,34 +1061,35 @@ export default function ProfessionalDevOpsPortfolio() {
           </div>
         </div>
       </section>
+
       {/* Certifications Section */}
-      <section id="certifications" className="relative py-24 px-6">
+      <section id="certifications" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
               Professional{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Certifications
               </span>
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
+            <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
               Validated expertise through industry-recognized certifications that demonstrate my commitment to
               continuous learning and professional development
             </p>
           </div>
-          <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
             {certifications.map((cert, index) => (
               <Card
                 key={index}
                 className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 animate-fade-in-up group overflow-hidden"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-6">
+                <CardContent className="p-6 sm:p-8">
+                  <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                     {/* Certification Logo */}
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 mx-auto sm:mx-0">
                       <div
-                        className={`w-20 h-20 bg-gradient-to-r ${cert.color} rounded-2xl p-1 group-hover:scale-110 transition-transform duration-300`}
+                        className={`w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r ${cert.color} rounded-2xl p-1 group-hover:scale-110 transition-transform duration-300`}
                       >
                         <div className="w-full h-full bg-white rounded-xl flex items-center justify-center">
                           <Image
@@ -951,36 +1097,36 @@ export default function ProfessionalDevOpsPortfolio() {
                             alt={`${cert.name} logo`}
                             width={60}
                             height={60}
-                            className="w-12 h-12 object-contain"
+                            className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
                           />
                         </div>
                       </div>
                     </div>
                     {/* Certification Details */}
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1 text-center sm:text-left">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
                         <div>
-                          <h3 className="text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors duration-300">
+                          <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors duration-300">
                             {cert.name}
                           </h3>
-                          <div className="flex items-center space-x-3 text-cyan-400 mb-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 text-cyan-400 mb-2 text-sm">
                             <span className="font-semibold">{cert.code}</span>
-                            <span>•</span>
+                            <span className="hidden sm:inline">•</span>
                             <span>{cert.issuer}</span>
-                            <span>•</span>
+                            <span className="hidden sm:inline">•</span>
                             <span>{cert.date}</span>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <CheckCircle className="h-5 w-5 text-green-400" />
-                          <span className="text-green-400 text-sm font-medium">Verified</span>
+                        <div className="flex items-center justify-center sm:justify-start space-x-2 mt-2 sm:mt-0">
+                          <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
+                          <span className="text-green-400 text-xs sm:text-sm font-medium">Verified</span>
                         </div>
                       </div>
-                      <p className="text-white/80 mb-4 leading-relaxed">{cert.description}</p>
+                      <p className="text-white/80 mb-4 leading-relaxed text-sm sm:text-base">{cert.description}</p>
                       {/* Skills Covered */}
                       <div className="mb-4">
                         <h4 className="text-white font-semibold mb-2 text-sm">Skills Covered:</h4>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                           {cert.skills.map((skill, skillIndex) => (
                             <Badge
                               key={skillIndex}
@@ -995,7 +1141,7 @@ export default function ProfessionalDevOpsPortfolio() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 bg-transparent transition-all duration-300"
+                        className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 bg-transparent transition-all duration-300 w-full sm:w-auto"
                         asChild
                       >
                         <Link href={cert.credentialUrl} target="_blank">
@@ -1010,70 +1156,73 @@ export default function ProfessionalDevOpsPortfolio() {
             ))}
           </div>
           {/* Future Certifications */}
-          <div className="mt-16 text-center">
-            <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-3xl p-8 backdrop-blur-sm border border-white/10 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-white mb-4">Next Certifications</h3>
-              <p className="text-white/80 mb-6">
+          <div className="mt-12 sm:mt-16 text-center">
+            <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-3xl p-6 sm:p-8 backdrop-blur-sm border border-white/10 max-w-2xl mx-auto">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Next Certifications</h3>
+              <p className="text-white/80 mb-6 text-sm sm:text-base">
                 Continuously expanding my expertise with upcoming certifications in cloud platforms and DevOps tools
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                {["Azure Administrator Associate", "Kubernetes Administrator", "Terraform Associate"].map((cert, index) => (
-                  <Badge
-                    key={index}
-                    variant="outline"
-                    className="border-white/30 text-white/70 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300"
-                  >
-                    {cert}
-                  </Badge>
-                ))}
+                {["Azure Administrator Associate", "Kubernetes Administrator", "Terraform Associate"].map(
+                  (cert, index) => (
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="border-white/30 text-white/70 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 text-xs sm:text-sm"
+                    >
+                      {cert}
+                    </Badge>
+                  ),
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
+
       {/* Enhanced Experience Section */}
-      <section id="experience" className="relative py-24 px-6 bg-black/20">
+      <section id="experience" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black/20">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
               Professional{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Journey
               </span>
             </h2>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {experience.map((exp, index) => (
               <Card
                 key={index}
                 className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 animate-fade-in-up group overflow-hidden"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <CardContent className="p-8">
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="md:col-span-2">
-                      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                <CardContent className="p-6 sm:p-8">
+                  <div className="grid lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2">
+                      <div className="flex flex-col mb-4">
                         <div>
-                          <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
+                          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
                             {exp.title}
                           </h3>
-                          <div className="flex flex-wrap items-center gap-4 text-cyan-400 mb-4">
+                          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-4 text-cyan-400 mb-4">
                             <div className="flex items-center space-x-2">
                               <Building className="h-4 w-4" />
-                              <span className="font-medium">{exp.company}</span>
+                              <span className="font-medium text-sm sm:text-base">{exp.company}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Calendar className="h-4 w-4" />
-                              <span>{exp.period}</span>
+                              <span className="text-sm sm:text-base">{exp.period}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <MapPin className="h-4 w-4" />
-                              <span>{exp.location}</span>
+                              <span className="text-sm sm:text-base">{exp.location}</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <p className="text-white/80 mb-6 leading-relaxed">{exp.description}</p>
+                      <p className="text-white/80 mb-6 leading-relaxed text-sm sm:text-base">{exp.description}</p>
                       <div className="space-y-3">
                         <h4 className="text-white font-semibold mb-3 flex items-center">
                           <Award className="h-4 w-4 text-cyan-400 mr-2" />
@@ -1082,7 +1231,7 @@ export default function ProfessionalDevOpsPortfolio() {
                         {exp.achievements.map((achievement, achIndex) => (
                           <div key={achIndex} className="flex items-start space-x-3 group/achievement">
                             <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mt-2 group-hover/achievement:scale-150 transition-transform duration-300" />
-                            <span className="text-white/70 leading-relaxed group-hover/achievement:text-white transition-colors duration-300">
+                            <span className="text-white/70 leading-relaxed group-hover/achievement:text-white transition-colors duration-300 text-sm sm:text-base">
                               {achievement}
                             </span>
                           </div>
@@ -1095,7 +1244,7 @@ export default function ProfessionalDevOpsPortfolio() {
                         {exp.technologies.map((tech, techIndex) => (
                           <Badge
                             key={techIndex}
-                            className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 hover:bg-cyan-400/10 transition-all duration-300"
+                            className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
                           >
                             {tech}
                           </Badge>
@@ -1109,27 +1258,26 @@ export default function ProfessionalDevOpsPortfolio() {
           </div>
         </div>
       </section>
+
       {/* Enhanced Projects Section */}
-      <section id="projects" className="relative py-24 px-6">
+      <section id="projects" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
               Featured{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Projects
               </span>
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
+            <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
               Showcasing innovative solutions that drive business success and technical excellence
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className={`bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 animate-fade-in-up group overflow-hidden ${
-                  project.featured ? "md:col-span-2 lg:col-span-1" : ""
-                }`}
+                className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 animate-fade-in-up group overflow-hidden"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
                 <div className="relative overflow-hidden cursor-pointer" onClick={() => openGallery(project, 0)}>
@@ -1138,13 +1286,13 @@ export default function ProfessionalDevOpsPortfolio() {
                     alt={project.title}
                     width={600}
                     height={300}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-40 sm:h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   {/* Project Metrics Overlay */}
                   <div className="absolute top-4 left-4 space-y-2">
                     {project.featured && (
-                      <Badge className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white">
+                      <Badge className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs">
                         <Sparkles className="mr-1 h-3 w-3" />
                         Featured
                       </Badge>
@@ -1152,33 +1300,33 @@ export default function ProfessionalDevOpsPortfolio() {
                   </div>
                   {/* Gallery indicator */}
                   {project.images.length > 1 && (
-                    <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
+                    <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-xs sm:text-sm">
                       {project.images.length} photos
                     </div>
                   )}
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="text-white text-center">
-                      <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <ExternalLink className="h-6 w-6" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <ExternalLink className="h-5 w-5 sm:h-6 sm:w-6" />
                       </div>
-                      <p className="text-sm">View Gallery</p>
+                      <p className="text-xs sm:text-sm">View Gallery</p>
                     </div>
                   </div>
                 </div>
-                <CardContent className="p-6">
+                <CardContent className="p-4 sm:p-6">
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
                       {project.title}
                     </h3>
                   </div>
-                  <p className="text-white/70 mb-4 leading-relaxed">{project.description}</p>
+                  <p className="text-white/70 mb-4 leading-relaxed text-sm sm:text-base">{project.description}</p>
                   {/* Project Metrics */}
                   {project.metrics && (
-                    <div className="grid grid-cols-3 gap-4 mb-4 p-3 bg-white/5 rounded-lg">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 p-2 sm:p-3 bg-white/5 rounded-lg">
                       {Object.entries(project.metrics).map(([key, value], metricIndex) => (
                         <div key={metricIndex} className="text-center">
-                          <div className="text-cyan-400 font-bold text-sm">{value}</div>
+                          <div className="text-cyan-400 font-bold text-xs sm:text-sm">{value}</div>
                           <div className="text-white/60 text-xs capitalize">{key.replace("_", " ")}</div>
                         </div>
                       ))}
@@ -1189,7 +1337,7 @@ export default function ProfessionalDevOpsPortfolio() {
                       <Badge
                         key={techIndex}
                         variant="outline"
-                        className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
+                        className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300 text-xs"
                       >
                         {tech}
                       </Badge>
@@ -1201,42 +1349,43 @@ export default function ProfessionalDevOpsPortfolio() {
           </div>
         </div>
       </section>
+
       {/* Enhanced Contact Section */}
-      <section id="contact" className="relative py-24 px-6 bg-black/20">
+      <section id="contact" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black/20">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
               Let's Build Something{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Amazing
               </span>
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
+            <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
               Ready to transform your infrastructure? Let's discuss your next project and create scalable solutions
               together.
             </p>
           </div>
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
             {/* Contact Info */}
-            <div className="space-y-8 animate-fade-in-up animation-delay-500">
-              <div className="space-y-6">
+            <div className="space-y-6 sm:space-y-8 animate-fade-in-up animation-delay-500">
+              <div className="space-y-4 sm:space-y-6">
                 {[
                   {
-                    icon: <Mail className="h-6 w-6" />,
+                    icon: <Mail className="h-5 w-5 sm:h-6 sm:w-6" />,
                     label: "Email",
                     value: "hmaidi185@gmail.com",
                     href: "mailto:hmaidi185@gmail.com",
                     color: "from-blue-500 to-cyan-500",
                   },
                   {
-                    icon: <Phone className="h-6 w-6" />,
+                    icon: <Phone className="h-5 w-5 sm:h-6 sm:w-6" />,
                     label: "Phone",
                     value: "+216 58 229 725",
                     href: "tel:+21658229725",
                     color: "from-green-500 to-emerald-500",
                   },
                   {
-                    icon: <MapPin className="h-6 w-6" />,
+                    icon: <MapPin className="h-5 w-5 sm:h-6 sm:w-6" />,
                     label: "Location",
                     value: "Tunisia",
                     href: "#",
@@ -1245,15 +1394,15 @@ export default function ProfessionalDevOpsPortfolio() {
                 ].map((contact, index) => (
                   <div key={index} className="flex items-center space-x-4 group">
                     <div
-                      className={`w-14 h-14 bg-gradient-to-r ${contact.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                      className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${contact.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
                     >
                       <div className="text-white">{contact.icon}</div>
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold text-lg">{contact.label}</h3>
+                      <h3 className="text-white font-semibold text-base sm:text-lg">{contact.label}</h3>
                       <Link
                         href={contact.href}
-                        className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 text-lg"
+                        className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 text-base sm:text-lg"
                       >
                         {contact.value}
                       </Link>
@@ -1262,13 +1411,17 @@ export default function ProfessionalDevOpsPortfolio() {
                 ))}
               </div>
               {/* Social Links */}
-              <div className="pt-8 border-t border-white/10">
-                <h3 className="text-white font-semibold text-lg mb-4">Connect with me</h3>
+              <div className="pt-6 sm:pt-8 border-t border-white/10">
+                <h3 className="text-white font-semibold text-base sm:text-lg mb-4">Connect with me</h3>
                 <div className="flex space-x-4">
                   {[
-                    { icon: <Github className="h-5 w-5" />, href: "https://github.com/MohamedHmaidi", label: "GitHub" },
                     {
-                      icon: <Linkedin className="h-5 w-5" />,
+                      icon: <Github className="h-4 w-4 sm:h-5 sm:w-5" />,
+                      href: "https://github.com/MohamedHmaidi",
+                      label: "GitHub",
+                    },
+                    {
+                      icon: <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />,
                       href: "https://www.linkedin.com/in/mohamed-hmaidi-b3b1741b2/",
                       label: "LinkedIn",
                     },
@@ -1277,7 +1430,7 @@ export default function ProfessionalDevOpsPortfolio() {
                       key={index}
                       href={social.href}
                       target="_blank"
-                      className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white hover:text-cyan-400 hover:bg-white/10 hover:border-cyan-400/30 transition-all duration-300 group"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white hover:text-cyan-400 hover:bg-white/10 hover:border-cyan-400/30 transition-all duration-300 group"
                     >
                       <div className="group-hover:scale-110 transition-transform duration-300">{social.icon}</div>
                     </Link>
@@ -1289,12 +1442,12 @@ export default function ProfessionalDevOpsPortfolio() {
             <div className="relative animate-fade-in-up animation-delay-700">
               <div className="relative">
                 {/* Floating Elements */}
-                <div className="absolute -top-10 -left-10 w-20 h-20 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
-                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float animation-delay-2000"></div>
+                <div className="absolute -top-10 -left-10 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
+                <div className="absolute -bottom-10 -right-10 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 animate-float animation-delay-2000"></div>
                 {/* Main Photo Container */}
-                <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10 hover-glow">
+                <div className="relative bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-3xl p-6 sm:p-8 backdrop-blur-sm border border-white/10 hover-glow">
                   <div className="relative">
-                    <div className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-400 p-1 transform hover:scale-105 transition-all duration-500">
+                    <div className="w-64 h-64 sm:w-80 sm:h-80 mx-auto rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-400 p-1 transform hover:scale-105 transition-all duration-500">
                       <Image
                         src="/mohamedhm.jpeg" // Replace with the actual path to your photo
                         alt="Hmaidi Mohamed - Contact Photo"
@@ -1304,14 +1457,14 @@ export default function ProfessionalDevOpsPortfolio() {
                       />
                     </div>
                     {/* Floating Tech Icons */}
-                    <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center animate-bounce">
-                      <Cloud className="h-6 w-6" />
+                    <div className="absolute -top-4 -right-4 w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-xl flex items-center justify-center animate-bounce">
+                      <Cloud className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center animate-bounce animation-delay-1000">
-                      <Container className="h-6 w-6" />
+                    <div className="absolute -bottom-4 -left-4 w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-xl flex items-center justify-center animate-bounce animation-delay-1000">
+                      <Container className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <div className="absolute top-1/2 -right-8 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
-                      <Code className="h-5 w-5" />
+                    <div className="absolute top-1/2 -right-6 sm:-right-8 w-8 h-8 sm:w-10 sm:h-10 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
+                      <Code className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                   </div>
                 </div>
@@ -1320,149 +1473,145 @@ export default function ProfessionalDevOpsPortfolio() {
           </div>
         </div>
       </section>
+
       {/* Enhanced Footer */}
-      <footer className="relative py-12 px-6 border-t border-white/10">
+      <footer className="relative py-8 sm:py-12 px-4 sm:px-6 border-t border-white/10">
         <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-xl flex items-center justify-center">
-                <Server className="h-6 w-6 text-white" />
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-xl flex items-center justify-center">
+                <Server className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
-              <div>
-                <span className="text-white font-bold text-xl">Hmaidi Mohamed</span>
-                <p className="text-white/60 text-sm">Junior Cloud & DevOps Engineer</p>
+              <div className="text-center md:text-left">
+                <span className="text-white font-bold text-lg sm:text-xl">Hmaidi Mohamed</span>
+                <p className="text-white/60 text-xs sm:text-sm">Junior Cloud & DevOps Engineer</p>
               </div>
             </div>
-            <p className="text-white/60 text-center mb-4 md:mb-0">© 2025 Hmaidi Mohamed.</p>
+            <p className="text-white/60 text-center text-sm">© 2025 Hmaidi Mohamed.</p>
             <div className="flex items-center space-x-4">
               <Link
                 href="https://github.com/MohamedHmaidi"
                 target="_blank"
                 className="text-white/60 hover:text-cyan-400 transition-colors duration-300"
               >
-                <Github className="h-5 w-5" />
+                <Github className="h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
               <Link
                 href="https://www.linkedin.com/in/mohamed-hmaidi-b3b1741b2/"
                 target="_blank"
                 className="text-white/60 hover:text-cyan-400 transition-colors duration-300"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
               <Link
                 href="mailto:hmaidi185@gmail.com"
                 className="text-white/60 hover:text-cyan-400 transition-colors duration-300"
               >
-                <Mail className="h-5 w-5" />
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
             </div>
           </div>
         </div>
       </footer>
+
       {/* Enhanced Gallery Modal */}
       {selectedProject && (
-  <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
-    <div className="relative max-w-4xl w-full">
-      {/* Close button - Dark version */}
-      <button
-        onClick={closeGallery}
-        className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
-      >
-        <X className="h-5 w-5" />
-      </button>
-      
-      {/* Image container with fixed size */}
-      <div className="relative w-full h-[400px] flex items-center justify-center"> {/* Fixed height container */}
-        <Image
-          src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
-          alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-          width={700}  // Fixed width
-          height={400} // Fixed height
-          className="object-contain rounded-lg" // Removed responsive sizing
-          style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            width: 'auto',
-            height: 'auto'
-          }}
-        />
-        
-        {/* Navigation arrows - Dark version */}
-        {selectedProject.images.length > 1 && (
-          <>
+        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="relative max-w-4xl w-full">
+            {/* Close button - Dark version */}
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevImage();
-              }}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
+              onClick={closeGallery}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <X className="h-5 w-5" />
             </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextImage();
-              }}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </>
-        )}
-      </div>
-      
-      {/* Project info */}
-      <div className="mt-6 text-center">
-        <h3 className="text-2xl font-bold text-white mb-3">{selectedProject.title}</h3>
-        <p className="text-white/80 mb-4 max-w-2xl mx-auto text-sm leading-relaxed">
-          {selectedProject.longDescription || selectedProject.description}
-        </p>
-        
-        {/* Project Metrics */}
-        {selectedProject.metrics && (
-          <div className="grid grid-cols-3 gap-4 mb-4 max-w-md mx-auto">
-            {Object.entries(selectedProject.metrics).map(([key, value], metricIndex) => (
-              <div key={metricIndex} className="text-center p-3 bg-white/5 rounded-lg">
-                <div className="text-cyan-400 font-bold text-md">{value}</div>
-                <div className="text-white/60 text-xs capitalize">{key.replace("_", " ")}</div>
-              </div>
-            ))}
-          </div>
-        )}
-        
-        {/* Image counter */}
-        {selectedProject.images.length > 1 && (
-          <div className="flex justify-center space-x-2 mb-4">
-            {selectedProject.images.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentImageIndex(index);
-                }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex ? "bg-cyan-400 scale-125" : "bg-white/30 hover:bg-white/50"
-                }`}
+
+            {/* Image container with responsive sizing */}
+            <div className="relative w-full h-[300px] sm:h-[400px] flex items-center justify-center">
+              <Image
+                src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
+                alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                width={700}
+                height={400}
+                className="object-contain rounded-lg max-w-full max-h-full"
               />
-            ))}
+
+              {/* Navigation arrows - Dark version */}
+              {selectedProject.images.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      prevImage()
+                    }}
+                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      nextImage()
+                    }}
+                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black transition-all duration-300 hover:scale-110 border border-white/20"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Project info */}
+            <div className="mt-6 text-center">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">{selectedProject.title}</h3>
+              <p className="text-white/80 mb-4 max-w-2xl mx-auto text-sm leading-relaxed">
+                {selectedProject.longDescription || selectedProject.description}
+              </p>
+
+              {/* Project Metrics */}
+              {selectedProject.metrics && (
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 max-w-md mx-auto">
+                  {Object.entries(selectedProject.metrics).map(([key, value], metricIndex) => (
+                    <div key={metricIndex} className="text-center p-2 sm:p-3 bg-white/5 rounded-lg">
+                      <div className="text-cyan-400 font-bold text-sm sm:text-md">{value}</div>
+                      <div className="text-white/60 text-xs capitalize">{key.replace("_", " ")}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Image counter */}
+              {selectedProject.images.length > 1 && (
+                <div className="flex justify-center space-x-2 mb-4">
+                  {selectedProject.images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setCurrentImageIndex(index)
+                      }}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex ? "bg-cyan-400 scale-125" : "bg-white/30 hover:bg-white/50"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-2 justify-center mb-4">
+                {selectedProject.tech.map((tech, techIndex) => (
+                  <Badge
+                    key={techIndex}
+                    className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 text-xs"
+                  >
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
           </div>
-        )}
-        
-        <div className="flex flex-wrap gap-2 justify-center mb-4">
-          {selectedProject.tech.map((tech, techIndex) => (
-            <Badge
-              key={techIndex}
-              className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 text-xs"
-            >
-              {tech}
-            </Badge>
-          ))}
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   )
 }
