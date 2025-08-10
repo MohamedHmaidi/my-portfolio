@@ -276,7 +276,7 @@ export default function ProfessionalDevOpsPortfolio() {
       logo: "/logos/azuree.png",
       description: "Foundational knowledge of cloud services and how those services are provided with Microsoft Azure.",
       skills: ["Cloud Computing", "Azure Services", "Security", "Compliance", "Pricing"],
-      credentialUrl: "https://www.credly.com/badges/7c041a78-a448-49d9-866f-c75df2c3575c/public_url", // Replace with actual credential URL
+      credentialUrl: "https://www.credly.com/badges/7c041a78-a448-49d9-866f-c75df2c3575c/public_url",
       color: "from-blue-500 to-cyan-500",
     },
     {
@@ -286,9 +286,9 @@ export default function ProfessionalDevOpsPortfolio() {
       date: "2023",
       logo: "/logos/aws.png",
       description:
-        "Foundational knowledge of cloud computing concepts, AWS core services, global infrastructure, security.",
+        "Foundational knowledge of cloud concepts, AWS core services, global infrastructure, security.",
       skills: ["Cloud Computing", "AWS Services", "Security", "Compliance", "Cloud Pricing"],
-      credentialUrl: "https://www.credly.com/badges/00309431-1def-4660-96ab-f77cbbf23321/public_url", // Replace with actual credential URL
+      credentialUrl: "https://www.credly.com/badges/00309431-1def-4660-96ab-f77cbbf23321/public_url", 
       color: "from-blue-500 to-cyan-500",
     },
   ]
@@ -407,34 +407,35 @@ export default function ProfessionalDevOpsPortfolio() {
       ],
     },
     {
-      title: "Cloud Intern: Reporting System for Cloud Services",
-      company: "Next Step IT",
-      period: "07/2024 - 09/2024",
-      location: "Charguia, Tunisia",
-      description:
-        "Designed and deployed an architecture integrating Nakivo, Zimbra, and vCenter for storage, messaging, and IaaS. Developed an automated backend with PowerShell scripts and an interactive dashboard, including PDF report generation. Ensured production deployment and continuous operation.",
-      achievements: [
-        "Designed architecture integrating Nakivo, Zimbra, and vCenter",
-        "Developed automated backend with PowerShell scripts",
-        "Created an interactive dashboard with PDF report generation",
-        "Ensured production deployment and continuous operation",
-      ],
-      technologies: [
-        "vCenter",
-        "VMware ESXi",
-        "Nakivo Backup Solution",
-        "Zimbra",
-        "Grafana",
-        "PowerShell",
-        "VMware CLI",
-        "Linux",
-        "RESTful API",
-        "SMTP",
-        "Spring Boot",
-        "Node.js",
-        "PostgreSQL",
-      ],
-    },
+  title: "Cloud Intern: Reporting System for Cloud Services",
+  company: "Next Step IT",
+  period: "07/2024 - 09/2024",
+  location: "Charguia, Tunisia",
+  description:
+    "Designed and deployed an architecture integrating a backup solution, a messaging solution, and an IaaS solution. Developed an automated backend with PowerShell scripts and an interactive dashboard, including PDF report generation. Ensured production deployment and continuous operation.",
+  achievements: [
+    "Designed architecture integrating a backup solution, a messaging solution, and an IaaS solution",
+    "Developed automated backend with PowerShell scripts",
+    "Created an interactive dashboard with PDF report generation",
+    "Ensured production deployment and continuous operation",
+  ],
+  technologies: [
+    "VMware ESXi",
+    "Backup Solution",
+    "Messaging Solution",
+    "IaaS Solution",
+    "Grafana",
+    "PowerShell",
+    "VMware CLI",
+    "Linux",
+    "RESTful API",
+    "SMTP",
+    "Spring Boot",
+    "Node.js",
+    "PostgreSQL",
+  ],
+}
+,
     {
       title: "DevOps Intern - automated CI/CD and DevSecOps pipeline",
       company: "General Automation Company",
@@ -1062,124 +1063,123 @@ export default function ProfessionalDevOpsPortfolio() {
         </div>
       </section>
 
-      {/* Certifications Section */}
-      <section id="certifications" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
-              Professional{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Certifications
-              </span>
-            </h2>
-            <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
-              Validated expertise through industry-recognized certifications that demonstrate my commitment to
-              continuous learning and professional development
-            </p>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            {certifications.map((cert, index) => (
-              <Card
-                key={index}
-                className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 animate-fade-in-up group overflow-hidden"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <CardContent className="p-6 sm:p-8">
-                  <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
-                    {/* Certification Logo */}
-                    <div className="flex-shrink-0 mx-auto sm:mx-0">
-                      <div
-                        className={`w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r ${cert.color} rounded-2xl p-1 group-hover:scale-110 transition-transform duration-300`}
-                      >
-                        <div className="w-full h-full bg-white rounded-xl flex items-center justify-center">
-                          <Image
-                            src={cert.logo || "/placeholder.svg"}
-                            alt={`${cert.name} logo`}
-                            width={60}
-                            height={60}
-                            className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {/* Certification Details */}
-                    <div className="flex-1 text-center sm:text-left">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
-                        <div>
-                          <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors duration-300">
-                            {cert.name}
-                          </h3>
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 text-cyan-400 mb-2 text-sm">
-                            <span className="font-semibold">{cert.code}</span>
-                            <span className="hidden sm:inline">•</span>
-                            <span>{cert.issuer}</span>
-                            <span className="hidden sm:inline">•</span>
-                            <span>{cert.date}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-center sm:justify-start space-x-2 mt-2 sm:mt-0">
-                          <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
-                          <span className="text-green-400 text-xs sm:text-sm font-medium">Verified</span>
-                        </div>
-                      </div>
-                      <p className="text-white/80 mb-4 leading-relaxed text-sm sm:text-base">{cert.description}</p>
-                      {/* Skills Covered */}
-                      <div className="mb-4">
-                        <h4 className="text-white font-semibold mb-2 text-sm">Skills Covered:</h4>
-                        <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                          {cert.skills.map((skill, skillIndex) => (
-                            <Badge
-                              key={skillIndex}
-                              className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 text-xs"
-                            >
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      {/* Credential Link */}
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 bg-transparent transition-all duration-300 w-full sm:w-auto"
-                        asChild
-                      >
-                        <Link href={cert.credentialUrl} target="_blank">
-                          <ExternalLink className="mr-2 h-3 w-3" />
-                          View Credential
-                        </Link>
-                      </Button>
+     {/* Certifications Section */}
+<section id="certifications" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6">
+  <div className="container mx-auto max-w-6xl">
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up">
+        Professional{" "}
+        <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+          Certifications
+        </span>
+      </h2>
+      <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
+        Validated expertise through industry-recognized certifications that demonstrate my commitment to
+        continuous learning and professional development
+      </p>
+    </div>
+    <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+      {certifications.map((cert, index) => (
+        <Card
+          key={index}
+          className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 transform hover:scale-105 animate-fade-in-up group overflow-hidden"
+          style={{ animationDelay: `${index * 200}ms` }}
+        >
+          <CardContent className="p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0">
+              {/* Certification Logo */}
+              <div className="flex-shrink-0 mx-auto sm:mx-0 sm:mr-6"> {/* Added margin-right here */}
+                <div
+                  className={`w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r ${cert.color} rounded-2xl p-1 group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <div className="w-full h-full bg-white rounded-xl flex items-center justify-center">
+                    <Image
+                      src={cert.logo || "/placeholder.svg"}
+                      alt={`${cert.name} logo`}
+                      width={60}
+                      height={60}
+                      className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Certification Details */}
+              <div className="flex-1 text-center sm:text-left">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors duration-300">
+                      {cert.name}
+                    </h3>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 text-cyan-400 mb-2 text-sm">
+                      <span className="font-semibold">{cert.code}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span>{cert.issuer}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span>{cert.date}</span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          {/* Future Certifications */}
-          <div className="mt-12 sm:mt-16 text-center">
-            <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-3xl p-6 sm:p-8 backdrop-blur-sm border border-white/10 max-w-2xl mx-auto">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Next Certifications</h3>
-              <p className="text-white/80 mb-6 text-sm sm:text-base">
-                Continuously expanding my expertise with upcoming certifications in cloud platforms and DevOps tools
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center">
-                {["Azure Administrator Associate", "Kubernetes Administrator", "Terraform Associate"].map(
-                  (cert, index) => (
-                    <Badge
-                      key={index}
-                      variant="outline"
-                      className="border-white/30 text-white/70 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 text-xs sm:text-sm"
-                    >
-                      {cert}
-                    </Badge>
-                  ),
-                )}
+                  <div className="flex items-center justify-center sm:justify-start space-x-2 mt-2 sm:mt-0">
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
+                    <span className="text-green-400 text-xs sm:text-sm font-medium">Verified</span>
+                  </div>
+                </div>
+                <p className="text-white/80 mb-4 leading-relaxed text-sm sm:text-base">{cert.description}</p>
+                {/* Skills Covered */}
+                <div className="mb-4">
+                  <h4 className="text-white font-semibold mb-2 text-sm">Skills Covered:</h4>
+                  <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                    {cert.skills.map((skill, skillIndex) => (
+                      <Badge
+                        key={skillIndex}
+                        className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 border-cyan-400/30 text-xs"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                {/* Credential Link */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 bg-transparent transition-all duration-300 w-full sm:w-auto"
+                  asChild
+                >
+                  <Link href={cert.credentialUrl} target="_blank">
+                    <ExternalLink className="mr-2 h-3 w-3" />
+                    View Credential
+                  </Link>
+                </Button>
               </div>
             </div>
-          </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+    {/* Future Certifications */}
+    <div className="mt-12 sm:mt-16 text-center">
+      <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-3xl p-6 sm:p-8 backdrop-blur-sm border border-white/10 max-w-2xl mx-auto">
+        <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Next Certifications</h3>
+        <p className="text-white/80 mb-6 text-sm sm:text-base">
+          Continuously expanding my expertise with upcoming certifications in cloud platforms and DevOps tools
+        </p>
+        <div className="flex flex-wrap gap-3 justify-center">
+          {["Azure Administrator Associate", "Kubernetes Administrator", "Terraform Associate"].map(
+            (cert, index) => (
+              <Badge
+                key={index}
+                variant="outline"
+                className="border-white/30 text-white/70 hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 text-xs sm:text-sm"
+              >
+                {cert}
+              </Badge>
+            ),
+          )}
         </div>
-      </section>
-
+      </div>
+    </div>
+  </div>
+</section>
       {/* Enhanced Experience Section */}
       <section id="experience" className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black/20">
         <div className="container mx-auto max-w-6xl">
